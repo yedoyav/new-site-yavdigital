@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yavdigital.com.br/sitemap.xml
