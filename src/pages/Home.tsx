@@ -717,6 +717,99 @@ export function Home() {
         </div>
       </section>
 
+      {/* Cases Section */}
+      <section className="py-[60px] md:py-[96px] px-5 md:px-[52px] bg-background border-t border-border">
+        <motion.div 
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={fadeUp}
+        >
+          <div>
+            <div className="inline-flex items-center gap-1.5 text-[12px] font-bold tracking-[0.12em] uppercase px-3.5 py-1.5 rounded-xl mb-4 font-mono bg-primary-light text-primary before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-primary">
+              Casos de Sucesso
+            </div>
+            <h2 className="text-[clamp(32px,4vw,52px)] font-extrabold tracking-[-1.5px] leading-[1.06] text-text-primary max-w-[560px]">
+              Resultados que inspiram
+            </h2>
+          </div>
+          <Link to="/cases" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+            Ver todos os cases <ArrowRight className="w-4 h-4" />
+          </Link>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            {
+              name: 'C.Kamura',
+              logo: 'CK',
+              industry: 'Moda & Acessórios',
+              url: 'https://www.ckamura.com.br/',
+              metric: '+145%',
+              label: 'Crescimento GMV',
+              delay: 0.08
+            },
+            {
+              name: 'Arantz',
+              logo: 'AR',
+              industry: 'Esportes & Outdoor',
+              url: 'https://www.arantz.com.br/',
+              metric: '+210%',
+              label: 'Receita Online',
+              delay: 0.16
+            },
+            {
+              name: 'Bayard Esportes',
+              logo: 'BY',
+              industry: 'Artigos Esportivos',
+              url: 'https://www.bayardesportes.com.br/',
+              metric: '+178%',
+              label: 'Conversão E-commerce',
+              delay: 0.24
+            },
+          ].map((c, i) => (
+            <motion.div
+              key={c.name}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={{
+                hidden: { opacity: 0, y: 28 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.65, delay: c.delay, ease: [0.16, 1, 0.3, 1] } }
+              }}
+            >
+              <Link to="/cases" className="group block bg-white rounded-2xl overflow-hidden border border-border transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_48px_rgba(110,41,246,0.08)] h-full flex flex-col">
+                <div className="aspect-[16/9] bg-gradient-to-br from-primary/10 via-primary/5 to-transparent relative overflow-hidden">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-24 h-24 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-4xl font-black text-white shadow-lg group-hover:scale-110 transition-transform duration-500">
+                      {c.logo}
+                    </div>
+                  </div>
+                  <div className="absolute top-4 left-4">
+                    <span className="text-xs font-bold tracking-[0.12em] uppercase px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-primary">
+                      {c.industry}
+                    </span>
+                  </div>
+                </div>
+                <div className="p-6 flex flex-col flex-grow">
+                  <h3 className="text-xl font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">
+                    {c.name}
+                  </h3>
+                  <div className="mt-auto pt-4">
+                    <div className="text-3xl font-black text-primary mb-1">{c.metric}</div>
+                    <div className="text-sm text-text-muted font-medium">{c.label}</div>
+                  </div>
+                  <div className="inline-flex items-center gap-2 text-primary font-semibold text-[13px] mt-4">
+                    Conhecer case <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
       {/* FAQ Section */}
       <section className="py-[60px] md:py-[96px] px-5 md:px-[52px] bg-white border-t border-border">
         <motion.div 
