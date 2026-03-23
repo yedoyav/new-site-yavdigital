@@ -9,20 +9,26 @@ interface SEOProps {
   ogType?: string;
   ogImage?: string;
   schema?: object;
+  noindex?: boolean;
 }
 
 export function SEO({ 
   title, 
   description = "Especialistas em operação de e-commerce e marketplaces. Implantação, gestão e inteligência para VTEX, Shopify, Mercado Livre e Amazon.", 
-  keywords = "e-commerce, marketplace, gestão de e-commerce, implantação vtex, implantação shopify, mercado livre ads, amazon ads, tray, nuvemshop, wake, consultoria e-commerce",
+  keywords = "gestão de e-commerce, marketplace, vtex, shopify, mercado livre, amazon, shopee, implantação de loja virtual, CRO, SEO para e-commerce, mercado livre ads, amazon ads, gestão de marketplace, consultoria e-commerce, otimização de conversão",
   author = "YAV Digital",
   canonical = "https://yavdigital.com.br",
   ogType = "website",
   ogImage = "https://yavdigital.com.br/og-image.jpg",
-  schema
+  schema,
+  noindex = false
 }: SEOProps) {
   const siteTitle = "YAV Digital — E-commerce & Marketplaces";
   const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
+  
+  const robotsContent = noindex 
+    ? "noindex, nofollow" 
+    : "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1";
 
   return (
     <Helmet>
@@ -31,6 +37,7 @@ export function SEO({
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
       <meta name="author" content={author} />
+      <meta name="robots" content={robotsContent} />
       <link rel="canonical" href={canonical} />
 
       {/* Open Graph / Facebook */}
@@ -40,6 +47,7 @@ export function SEO({
       <meta property="og:image" content={ogImage} />
       <meta property="og:url" content={canonical} />
       <meta property="og:site_name" content="YAV Digital" />
+      <meta property="og:locale" content="pt_BR" />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -47,11 +55,18 @@ export function SEO({
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
       <meta name="twitter:site" content="@yavdigital" />
+      <meta name="twitter:creator" content="@yavdigital" />
 
-      {/* LLM & Search Engine Optimization */}
-      <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-      <meta name="googlebot" content="index, follow" />
-      <meta name="bingbot" content="index, follow" />
+      {/* Search Engine Bots */}
+      <meta name="googlebot" content={noindex ? "noindex, nofollow" : "index, follow"} />
+      <meta name="bingbot" content={noindex ? "noindex, nofollow" : "index, follow"} />
+      
+      {/* Mobile & PWA */}
+      <meta name="theme-color" content="#6E29F6" />
+      <meta name="mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+      <meta name="apple-mobile-web-app-title" content="YAV Digital" />
       
       {/* Structured Data (JSON-LD) */}
       {schema && (

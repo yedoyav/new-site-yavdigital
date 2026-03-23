@@ -1,0 +1,33 @@
+{
+  "name": "YAV Digital — E-commerce & Marketplaces",
+  "short_name": "YAV Digital",
+  "description": "Especialistas em operação de e-commerce e marketplaces. Implantação, gestão e inteligência para VTEX, Shopify, Mercado Livre e Amazon.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F2F1F6",
+  "theme_color": "#6E29F6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "categories": ["business", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Nossos Serviços",
+      "url": "/servicos",
+      "description": "Ver todos os serviços YAV Digital"
+    },
+    {
+      "name": "Entre em Contato",
+      "url": "/contato",
+      "description": "Agende um diagnóstico gratuito"
+    }
+  ]
+}
