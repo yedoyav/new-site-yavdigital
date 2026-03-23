@@ -27,6 +27,7 @@ export function Navbar() {
   const navLinks = [
     { name: 'Início', path: '/' },
     { name: 'Serviços', path: '/servicos', hasDropdown: true },
+    { name: 'Cases', path: '/cases' },
     { name: 'Como Trabalhamos', path: '/metodologia' },
     { name: 'Plataformas', path: '/plataformas' },
     { name: 'Blog', path: '/blog' },

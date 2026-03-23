@@ -67,6 +67,7 @@ export function Footer() {
           <h5 className="text-[12px] font-bold tracking-[0.18em] uppercase text-white/40 mb-3 font-mono">YAV Digital</h5>
           <ul className="flex flex-col gap-2" role="list">
             <li><Link to="/" className="text-[13px] text-white/60 hover:text-white/85 transition-colors">Início</Link></li>
+            <li><Link to="/cases" className="text-[13px] text-white/60 hover:text-white/85 transition-colors">Cases de Sucesso</Link></li>
             <li><Link to="/metodologia" className="text-[13px] text-white/60 hover:text-white/85 transition-colors">Como trabalhamos</Link></li>
             <li><Link to="/plataformas" className="text-[13px] text-white/60 hover:text-white/85 transition-colors">Plataformas</Link></li>
             <li><Link to="/blog" className="text-[13px] text-white/60 hover:text-white/85 transition-colors">Blog</Link></li>

@@ -14,6 +14,7 @@ import { Platforms } from './pages/Platforms';
 import { Contact } from './pages/Contact';
 import { Blog } from './pages/Blog';
 import { BlogPost } from './pages/BlogPost';
+import { Cases } from './pages/Cases';
 import { useEffect } from 'react';
 
 function ScrollToTop() {
@@ -43,6 +44,7 @@ function AnimatedRoutes() {
           <Route path="servicos/:slug" element={<ServiceDetail />} />
           <Route path="metodologia" element={<Methodology />} />
           <Route path="plataformas" element={<Platforms />} />
+          <Route path="cases" element={<Cases />} />
           <Route path="contato" element={<Contact />} />
           <Route path="blog" element={<Blog />} />
           <Route path="blog/:slug" element={<BlogPost />} />
