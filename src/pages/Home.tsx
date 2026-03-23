@@ -99,8 +99,12 @@ export function Home() {
       <SEO 
         schema={homeSchema}
       />
-      {/* Hero Section */}
-      <section className="min-h-screen pt-[100px] pb-20 px-5 md:px-[52px] bg-[#0C0B16] grid grid-cols-1 md:grid-cols-2 gap-14 items-center relative overflow-hidden">
+      {/* Hero Section - Optimized for conversion and clarity */}
+      <section 
+        id="inicio" 
+        className="min-h-screen pt-[100px] pb-20 px-5 md:px-[52px] bg-[#0C0B16] grid grid-cols-1 md:grid-cols-2 gap-14 items-center relative overflow-hidden"
+        aria-label="Seção principal"
+      >
         <div className="absolute -bottom-10 -left-5 text-[clamp(100px,22vw,340px)] font-black text-primary/5 leading-[0.85] tracking-[-10px] pointer-events-none select-none animate-[drift_16s_ease-in-out_infinite_alternate]">
           YAV
         </div>
@@ -110,8 +114,8 @@ export function Home() {
         <div className="absolute w-[220px] h-[220px] bg-primary/10 rounded-full blur-[60px] top-[40%] left-[32%] pointer-events-none" />
 
         <div className="relative z-10">
-          <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 text-white/85 text-[13px] font-medium px-3.5 py-1.5 rounded-xl mb-5">
-            <span className="w-1.5 h-1.5 bg-success rounded-full animate-[blink_2.2s_ease-in-out_infinite]" />
+          <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 text-white/85 text-[13px] font-medium px-3.5 py-1.5 rounded-xl mb-5" role="status">
+            <span className="w-1.5 h-1.5 bg-success rounded-full animate-[blink_2.2s_ease-in-out_infinite]" aria-hidden="true" />
             Especialistas em E-commerce & Marketplaces
           </div>
           <h1 className="text-[clamp(46px,6.5vw,84px)] font-black leading-[0.98] tracking-[-3px] text-white mb-5">
@@ -124,11 +128,19 @@ export function Home() {
             Gestão completa de e-commerces e marketplaces — da estratégia à execução. Especialistas por canal, reporte mensal e operação hands-on que gera economia e aprendizado contínuo.
           </p>
           <div className="flex flex-wrap items-center gap-3">
-            <Link to="/contato" className="inline-flex items-center gap-2 bg-primary text-white px-7 py-[13px] rounded-xl font-semibold text-sm transition-all duration-200 hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(110,41,246,0.32)]">
+            <Link 
+              to="/contato" 
+              className="inline-flex items-center gap-2 bg-primary text-white px-7 py-[13px] rounded-xl font-semibold text-sm transition-all duration-200 hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(110,41,246,0.32)] focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-[#0C0B16]"
+              aria-label="Agendar diagnóstico gratuito da sua operação"
+            >
               Agendar diagnóstico gratuito
-              <ArrowRight className="w-3 h-3" />
+              <ArrowRight className="w-3 h-3" aria-hidden="true" />
             </Link>
-            <Link to="/servicos" className="inline-flex items-center gap-2 bg-transparent text-white border-[1.5px] border-white/50 px-7 py-[13px] rounded-xl font-semibold text-sm transition-all duration-200 hover:bg-white/10 hover:border-white hover:-translate-y-0.5">
+            <Link 
+              to="/servicos" 
+              className="inline-flex items-center gap-2 bg-transparent text-white border-[1.5px] border-white/50 px-7 py-[13px] rounded-xl font-semibold text-sm transition-all duration-200 hover:bg-white/10 hover:border-white hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-[#0C0B16]"
+              aria-label="Conhecer todos os serviços oferecidos"
+            >
               Ver serviços
             </Link>
           </div>
@@ -655,8 +667,8 @@ export function Home() {
         </div>
       </section>
 
-      {/* Cases Section */}
-      <section className="py-[60px] md:py-[96px] px-5 md:px-[52px] bg-background border-t border-border">
+      {/* Cases Section - SEO optimized with semantic HTML and improved UX/UI */}
+      <section id="cases" className="py-[60px] md:py-[96px] px-5 md:px-[52px] bg-background border-t border-border" aria-labelledby="cases-heading">
         <motion.div 
           className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10"
           initial="hidden"
@@ -668,16 +680,24 @@ export function Home() {
             <div className="inline-flex items-center gap-1.5 text-[12px] font-bold tracking-[0.12em] uppercase px-3.5 py-1.5 rounded-xl mb-4 font-mono bg-primary-light text-primary before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-primary">
               Cases de Sucesso
             </div>
-            <h2 className="text-[clamp(32px,4vw,52px)] font-extrabold tracking-[-1.5px] leading-[1.06] text-text-primary max-w-[560px]">
+            <h2 id="cases-heading" className="text-[clamp(32px,4vw,52px)] font-extrabold tracking-[-1.5px] leading-[1.06] text-text-primary max-w-[560px]">
               Resultados reais, impacto mensurável
             </h2>
+            <p className="text-base text-text-secondary leading-relaxed mt-4 max-w-[520px]">
+              Conheça como transformamos operações digitais com estratégia, tecnologia e gestão especializada em e-commerce e marketplaces.
+            </p>
           </div>
-          <Link to="/cases" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
-            Ver todos os cases <ArrowRight className="w-4 h-4" />
+          <Link 
+            to="/cases" 
+            className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline group/link"
+            aria-label="Ver todos os cases de sucesso"
+          >
+            Ver todos os cases 
+            <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
           </Link>
         </motion.div>
 
-        <div className="grid grid-cols-1 gap-6">
+        <article className="grid grid-cols-1 gap-6">
           {casesData.slice(0, 1).map((caseItem, i) => (
             <motion.div
               key={caseItem.id}
@@ -689,55 +709,70 @@ export function Home() {
                 visible: { opacity: 1, y: 0, transition: { duration: 0.65, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] } }
               }}
             >
-              <Link to={`/cases/${caseItem.slug}`} className="group block bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_48px_rgba(110,41,246,0.08)] hover:border-primary/30">
+              <Link 
+                to={`/cases/${caseItem.slug}`} 
+                className="group block bg-white backdrop-blur-md rounded-2xl overflow-hidden border border-border/60 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_48px_rgba(110,41,246,0.12)] hover:border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:ring-offset-2"
+                aria-labelledby={`case-title-${caseItem.id}`}
+              >
                 <div className="flex flex-col md:flex-row">
-                  <div className="w-full md:w-[320px] h-[220px] md:h-auto overflow-hidden relative shrink-0">
+                  <figure className="w-full md:w-[320px] h-[220px] md:h-auto overflow-hidden relative shrink-0">
                     {caseItem.image ? (
-                      <img src={caseItem.image} alt={caseItem.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                      <img 
+                        src={caseItem.image} 
+                        alt={`Case de sucesso: ${caseItem.title}`} 
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-primary/10 to-[#9B5BFF]/10 flex items-center justify-center">
-                        <TrendingUp className="w-12 h-12 text-primary/30" />
+                        <TrendingUp className="w-12 h-12 text-primary/30" aria-hidden="true" />
                       </div>
                     )}
-                  </div>
+                  </figure>
                   <div className="p-6 md:p-8 flex flex-col flex-grow">
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="text-[11px] font-bold tracking-wider uppercase text-primary bg-primary-light px-2.5 py-1 rounded-lg font-mono">
-                        {caseItem.industry}
-                      </span>
-                      <span className="text-[11px] font-bold tracking-wider uppercase text-text-muted bg-background px-2.5 py-1 rounded-lg">
-                        {caseItem.scope}
-                      </span>
-                    </div>
-                    <h3 className="text-xl md:text-2xl font-bold text-text-primary mb-2 leading-tight group-hover:text-primary transition-colors">
-                      {caseItem.title}
-                    </h3>
-                    <p className="text-sm text-text-secondary leading-relaxed mb-4 line-clamp-2">
-                      {caseItem.subtitle}
-                    </p>
-                    <div className="mt-auto pt-4 border-t border-white/10">
+                    <header className="mb-4">
+                      <div className="flex items-center gap-2 mb-3 flex-wrap">
+                        <span className="text-[11px] font-bold tracking-wider uppercase text-primary bg-primary-light px-2.5 py-1 rounded-lg font-mono">
+                          {caseItem.industry}
+                        </span>
+                        <span className="text-[11px] font-bold tracking-wider uppercase text-text-muted bg-background px-2.5 py-1 rounded-lg">
+                          {caseItem.scope}
+                        </span>
+                      </div>
+                      <h3 
+                        id={`case-title-${caseItem.id}`}
+                        className="text-xl md:text-2xl font-bold text-text-primary mb-2 leading-tight group-hover:text-primary transition-colors"
+                      >
+                        {caseItem.title}
+                      </h3>
+                      <p className="text-sm text-text-secondary leading-relaxed line-clamp-2">
+                        {caseItem.subtitle}
+                      </p>
+                    </header>
+                    <div className="mt-auto pt-4 border-t border-border">
                       <div className="flex items-center gap-2 mb-3">
-                        <Check className="w-4 h-4 text-success" />
+                        <Check className="w-4 h-4 text-success" aria-hidden="true" />
                         <span className="text-xs font-bold text-text-primary uppercase tracking-wide">Principais Resultados</span>
                       </div>
-                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2" role="list">
                         {caseItem.results.slice(0, 4).map((result, idx) => (
                           <li key={idx} className="text-xs text-text-secondary flex items-start gap-2">
-                            <span className="w-1.5 h-1.5 bg-primary rounded-full mt-1 shrink-0" />
+                            <span className="w-1.5 h-1.5 bg-primary rounded-full mt-1 shrink-0" aria-hidden="true" />
                             <span className="line-clamp-1">{result}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
-                    <div className="mt-5 inline-flex items-center gap-2 text-primary font-semibold text-sm">
-                      Ver case completo <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-                    </div>
+                    <footer className="mt-5 inline-flex items-center gap-2 text-primary font-semibold text-sm">
+                      Ver case completo 
+                      <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                    </footer>
                   </div>
                 </div>
               </Link>
             </motion.div>
           ))}
-        </div>
+        </article>
       </section>
 
       {/* Blog Section */}
