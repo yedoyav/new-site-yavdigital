@@ -689,7 +689,7 @@ export function Home() {
                 visible: { opacity: 1, y: 0, transition: { duration: 0.65, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] } }
               }}
             >
-              <Link to={`/cases/${caseItem.slug}`} className="group block bg-white rounded-2xl overflow-hidden border border-border transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_48px_rgba(110,41,246,0.08)]">
+              <Link to={`/cases/${caseItem.slug}`} className="group block bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_48px_rgba(110,41,246,0.08)] hover:border-primary/30">
                 <div className="flex flex-col md:flex-row">
                   <div className="w-full md:w-[320px] h-[220px] md:h-auto overflow-hidden relative shrink-0">
                     {caseItem.image ? (
@@ -715,7 +715,7 @@ export function Home() {
                     <p className="text-sm text-text-secondary leading-relaxed mb-4 line-clamp-2">
                       {caseItem.subtitle}
                     </p>
-                    <div className="mt-auto pt-4 border-t border-border">
+                    <div className="mt-auto pt-4 border-t border-white/10">
                       <div className="flex items-center gap-2 mb-3">
                         <Check className="w-4 h-4 text-success" />
                         <span className="text-xs font-bold text-text-primary uppercase tracking-wide">Principais Resultados</span>
