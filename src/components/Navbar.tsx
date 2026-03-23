@@ -28,6 +28,7 @@ export function Navbar() {
     { name: 'Início', path: '/' },
     { name: 'Serviços', path: '/servicos', hasDropdown: true },
     { name: 'Como Trabalhamos', path: '/metodologia' },
+    { name: 'Cases', path: '/cases' },
     { name: 'Plataformas', path: '/plataformas' },
     { name: 'Blog', path: '/blog' },
   ];

@@ -1,10 +1,11 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Check, X, ArrowUpRight, Target, BarChart2, Link as LinkIcon, Zap, Shield, Rocket, Hexagon, Triangle, Circle, Box, Cloud, Feather } from 'lucide-react';
+import { ArrowRight, Check, X, ArrowUpRight, Target, BarChart2, Link as LinkIcon, Zap, Shield, Rocket, Hexagon, Triangle, Circle, Box, Cloud, Feather, TrendingUp } from 'lucide-react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { useEffect, useState } from 'react';
 import { blogPosts } from '../data/blog';
+import { casesData } from '../data/cases';
 import { SEO } from '../components/SEO';
 
 const fadeUp = {
@@ -651,6 +652,91 @@ export function Home() {
           <Link to="/metodologia" className="inline-flex items-center gap-2 bg-transparent text-white border-[1.5px] border-white/50 px-7 py-[13px] rounded-xl font-semibold text-sm transition-all duration-200 hover:bg-white/10 hover:border-white hover:-translate-y-0.5">
             Ver metodologia completa
           </Link>
+        </div>
+      </section>
+
+      {/* Cases Section */}
+      <section className="py-[60px] md:py-[96px] px-5 md:px-[52px] bg-background border-t border-border">
+        <motion.div 
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={fadeUp}
+        >
+          <div>
+            <div className="inline-flex items-center gap-1.5 text-[12px] font-bold tracking-[0.12em] uppercase px-3.5 py-1.5 rounded-xl mb-4 font-mono bg-primary-light text-primary before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-primary">
+              Cases de Sucesso
+            </div>
+            <h2 className="text-[clamp(32px,4vw,52px)] font-extrabold tracking-[-1.5px] leading-[1.06] text-text-primary max-w-[560px]">
+              Resultados reais, impacto mensurável
+            </h2>
+          </div>
+          <Link to="/cases" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+            Ver todos os cases <ArrowRight className="w-4 h-4" />
+          </Link>
+        </motion.div>
+
+        <div className="grid grid-cols-1 gap-6">
+          {casesData.slice(0, 1).map((caseItem, i) => (
+            <motion.div
+              key={caseItem.id}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={{
+                hidden: { opacity: 0, y: 28 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.65, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] } }
+              }}
+            >
+              <Link to={`/cases/${caseItem.slug}`} className="group block bg-white rounded-2xl overflow-hidden border border-border transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_48px_rgba(110,41,246,0.08)]">
+                <div className="flex flex-col md:flex-row">
+                  <div className="w-full md:w-[320px] h-[220px] md:h-auto overflow-hidden relative shrink-0">
+                    {caseItem.image ? (
+                      <img src={caseItem.image} alt={caseItem.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-primary/10 to-[#9B5BFF]/10 flex items-center justify-center">
+                        <TrendingUp className="w-12 h-12 text-primary/30" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-6 md:p-8 flex flex-col flex-grow">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-[11px] font-bold tracking-wider uppercase text-primary bg-primary-light px-2.5 py-1 rounded-lg font-mono">
+                        {caseItem.industry}
+                      </span>
+                      <span className="text-[11px] font-bold tracking-wider uppercase text-text-muted bg-background px-2.5 py-1 rounded-lg">
+                        {caseItem.scope}
+                      </span>
+                    </div>
+                    <h3 className="text-xl md:text-2xl font-bold text-text-primary mb-2 leading-tight group-hover:text-primary transition-colors">
+                      {caseItem.title}
+                    </h3>
+                    <p className="text-sm text-text-secondary leading-relaxed mb-4 line-clamp-2">
+                      {caseItem.subtitle}
+                    </p>
+                    <div className="mt-auto pt-4 border-t border-border">
+                      <div className="flex items-center gap-2 mb-3">
+                        <Check className="w-4 h-4 text-success" />
+                        <span className="text-xs font-bold text-text-primary uppercase tracking-wide">Principais Resultados</span>
+                      </div>
+                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        {caseItem.results.slice(0, 4).map((result, idx) => (
+                          <li key={idx} className="text-xs text-text-secondary flex items-start gap-2">
+                            <span className="w-1.5 h-1.5 bg-primary rounded-full mt-1 shrink-0" />
+                            <span className="line-clamp-1">{result}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="mt-5 inline-flex items-center gap-2 text-primary font-semibold text-sm">
+                      Ver case completo <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
         </div>
       </section>
 
