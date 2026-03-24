@@ -17,7 +17,7 @@ O Mercado Envios Full e Flex são os maiores impulsionadores de eficiência. Pro
 Conte com a YAV Digital para estruturar e escalar sua operação no Mercado Livre com previsibilidade e inteligência.`,
     date: '15 Mar 2026',
     category: 'Marketplace',
-    image: 'https://picsum.photos/seed/ml/800/500',
+    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1200',
     readTime: '5 min'
   },
   {
@@ -36,7 +36,7 @@ A VTEX brilha em cenários complexos. Se sua operação envolve múltiplas integ
 Não existe plataforma perfeita, existe a plataforma certa para o seu momento de negócio. Na YAV Digital, somos especialistas em ambas e ajudamos nossos clientes a tomar essa decisão com base em dados, arquitetura técnica e projeção de crescimento.`,
     date: '10 Mar 2026',
     category: 'E-commerce',
-    image: 'https://picsum.photos/seed/ecommerce/800/500',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200',
     readTime: '7 min'
   },
   {
@@ -57,7 +57,7 @@ CRO é o processo sistemático de aplicar inteligência de dados para melhorar a
 Na YAV Digital, aplicamos metodologias avançadas de CRO (Heatmaps, Testes A/B, Análise Heurística) para garantir que sua loja opere com o máximo de eficiência.`,
     date: '05 Mar 2026',
     category: 'Conversão',
-    image: 'https://picsum.photos/seed/cro/800/500',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200',
     readTime: '4 min'
   }
 ];

@@ -13,12 +13,12 @@ interface SEOProps {
 
 export function SEO({ 
   title, 
-  description = "Especialistas em operação de e-commerce e marketplaces. Implantação, gestão e inteligência para VTEX, Shopify, Mercado Livre e Amazon.", 
-  keywords = "e-commerce, marketplace, gestão de e-commerce, implantação vtex, implantação shopify, mercado livre ads, amazon ads, tray, nuvemshop, wake, consultoria e-commerce",
+  description = "Especialistas em operação de e-commerce e marketplaces. Implementação, gestão e inteligência para VTEX, Shopify, Mercado Livre e Amazon.", 
+  keywords = "e-commerce, marketplace, gestão de e-commerce, implementação vtex, implementação shopify, mercado livre ads, amazon ads, tray, nuvemshop, wake, consultoria e-commerce, squad e-commerce, operação digital",
   author = "YAV Digital",
   canonical = "https://yavdigital.com.br",
   ogType = "website",
-  ogImage = "https://yavdigital.com.br/og-image.jpg",
+  ogImage = "https://yavdigital.com.br/wp-content/uploads/2025/02/yav-logo-1.webp",
   schema
 }: SEOProps) {
   const siteTitle = "YAV Digital — E-commerce & Marketplaces";

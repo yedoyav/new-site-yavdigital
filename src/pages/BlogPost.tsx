@@ -1,9 +1,9 @@
 import { motion } from 'motion/react';
 import { Link, useParams, Navigate } from 'react-router-dom';
-import { ArrowLeft, Calendar, Clock } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Calendar, Clock, Share2, Bookmark, MessageCircle } from 'lucide-react';
 import { blogPosts } from '../data/blog';
-
 import { SEO } from '../components/SEO';
+import { Breadcrumbs } from '../components/Breadcrumbs';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -18,6 +18,27 @@ export function BlogPost() {
     return <Navigate to="/blog" replace />;
   }
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.excerpt,
+    "image": post.image,
+    "author": {
+      "@type": "Organization",
+      "name": "YAV Digital"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "YAV Digital",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://yavdigital.com.br/logo.png"
+      }
+    },
+    "datePublished": "2024-01-01T00:00:00Z" // Placeholder, ideally from post data
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -30,77 +51,121 @@ export function BlogPost() {
         description={post.excerpt} 
         ogImage={post.image}
       />
-      <section className="pt-[130px] pb-[72px] px-5 md:px-[52px] bg-accent relative overflow-hidden">
-        <div className="absolute w-[500px] h-[500px] bg-primary/20 rounded-full blur-[60px] -top-[120px] -right-[80px] pointer-events-none opacity-90" />
+      <script type="application/ld+json">
+        {JSON.stringify(articleSchema)}
+      </script>
+      
+      <section className="pt-[140px] pb-[80px] px-5 md:px-[52px] bg-accent relative overflow-hidden">
+        <div className="absolute w-[600px] h-[600px] bg-primary/20 rounded-full blur-[100px] -top-[150px] -right-[100px] pointer-events-none opacity-90" />
         <div className="absolute inset-0 pointer-events-none z-0 grain-overlay opacity-35" />
 
-        <div className="relative z-10 max-w-3xl mx-auto">
-          <Link to="/blog" className="inline-flex items-center gap-2 text-white/60 hover:text-white mb-8 transition-colors text-sm font-medium">
-            <ArrowLeft className="w-4 h-4" /> Voltar para o Blog
-          </Link>
+        <div className="relative z-10 max-w-4xl mx-auto">
+          <div className="mb-8">
+            <Breadcrumbs items={[
+              { label: 'Blog', path: '/blog' },
+              { label: post.title }
+            ]} />
+          </div>
           
-          <div className="flex items-center gap-4 mb-6">
-            <span className="text-[11px] font-bold tracking-wider uppercase text-primary bg-primary-light px-2.5 py-1 rounded-lg font-mono">
+          <div className="flex items-center gap-4 mb-8">
+            <span className="text-[11px] font-black tracking-[0.2em] uppercase text-primary bg-primary-light px-3 py-1.5 rounded-xl font-mono">
               {post.category}
             </span>
-            <div className="flex items-center gap-1.5 text-[13px] text-white/60 font-medium">
+            <div className="flex items-center gap-2 text-[13px] text-white/60 font-bold">
               <Calendar className="w-4 h-4" /> {post.date}
             </div>
-            <div className="flex items-center gap-1.5 text-[13px] text-white/60 font-medium">
+            <div className="flex items-center gap-2 text-[13px] text-white/60 font-bold">
               <Clock className="w-4 h-4" /> {post.readTime}
             </div>
           </div>
           
-          <h1 className="text-[clamp(36px,5vw,64px)] font-extrabold tracking-[-1.5px] leading-[1.06] text-white mb-6">
+          <h1 className="text-[clamp(36px,5vw,72px)] font-black tracking-[-3px] leading-[1] text-white mb-8">
             {post.title}
           </h1>
-          <p className="text-lg font-light text-white/70 leading-[1.78]">
+          <p className="text-xl font-light text-white/70 leading-relaxed max-w-3xl">
             {post.excerpt}
           </p>
         </div>
       </section>
 
-      <section className="py-16 md:py-24 px-5 md:px-[52px] bg-background">
-        <div className="max-w-3xl mx-auto">
+      <section className="py-20 md:py-32 px-5 md:px-[52px] bg-background">
+        <div className="max-w-4xl mx-auto">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
             variants={fadeUp}
-            className="rounded-2xl overflow-hidden mb-12 shadow-lg"
+            className="rounded-[40px] overflow-hidden mb-20 shadow-2xl border border-border"
           >
-            <img src={post.image} alt={post.title} className="w-full aspect-[21/9] object-cover" />
+            <img src={post.image} alt={post.title} className="w-full aspect-[21/9] object-cover" loading="lazy" />
           </motion.div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={fadeUp}
-            className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-p:text-text-secondary prose-p:font-light prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-strong:font-bold prose-strong:text-text-primary"
-          >
-            {/* Simple markdown parsing for the mock content */}
-            {post.content.split('\n\n').map((paragraph, i) => {
-              if (paragraph.startsWith('## ')) {
-                return <h2 key={i}>{paragraph.replace('## ', '')}</h2>;
-              }
-              if (paragraph.match(/^\d+\.\s/)) {
-                const items = paragraph.split('\n').map(item => item.replace(/^\d+\.\s/, ''));
-                return (
-                  <ol key={i} className="list-decimal pl-5 space-y-2">
-                    {items.map((item, j) => {
-                      const match = item.match(/\*\*(.*?)\*\*(.*)/);
-                      if (match) {
-                        return <li key={j}><strong>{match[1]}</strong>{match[2]}</li>;
-                      }
-                      return <li key={j}>{item}</li>;
-                    })}
-                  </ol>
-                );
-              }
-              return <p key={i}>{paragraph}</p>;
-            })}
-          </motion.div>
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_80px] gap-16">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={fadeUp}
+              className="prose prose-xl max-w-none prose-headings:font-black prose-headings:tracking-tight prose-h2:text-4xl prose-h2:mt-16 prose-h2:mb-8 prose-p:text-text-secondary prose-p:font-light prose-p:leading-relaxed prose-a:text-primary prose-a:font-bold prose-a:no-underline hover:prose-a:underline prose-strong:font-black prose-strong:text-text-primary prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-primary/5 prose-blockquote:p-8 prose-blockquote:rounded-2xl prose-blockquote:italic prose-img:rounded-3xl"
+            >
+              {/* Simple markdown parsing for the mock content */}
+              {post.content.split('\n\n').map((paragraph, i) => {
+                if (paragraph.startsWith('## ')) {
+                  return <h2 key={i} className="text-text-primary">{paragraph.replace('## ', '')}</h2>;
+                }
+                if (paragraph.match(/^\d+\.\s/)) {
+                  const items = paragraph.split('\n').map(item => item.replace(/^\d+\.\s/, ''));
+                  return (
+                    <ol key={i} className="list-decimal pl-6 space-y-4 my-8">
+                      {items.map((item, j) => {
+                        const match = item.match(/\*\*(.*?)\*\*(.*)/);
+                        if (match) {
+                          return <li key={j} className="text-text-secondary font-light"><strong>{match[1]}</strong>{match[2]}</li>;
+                        }
+                        return <li key={j} className="text-text-secondary font-light">{item}</li>;
+                      })}
+                    </ol>
+                  );
+                }
+                return <p key={i} className="text-text-secondary font-light leading-relaxed mb-6">{paragraph}</p>;
+              })}
+            </motion.div>
+
+            {/* Sticky Social Sidebar */}
+            <div className="hidden lg:block">
+              <div className="sticky top-32 flex flex-col gap-4">
+                <button className="w-14 h-14 rounded-2xl border border-border flex items-center justify-center text-text-muted hover:text-primary hover:border-primary transition-all duration-300 group">
+                  <Share2 className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                </button>
+                <button className="w-14 h-14 rounded-2xl border border-border flex items-center justify-center text-text-muted hover:text-primary hover:border-primary transition-all duration-300 group">
+                  <Bookmark className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                </button>
+                <button className="w-14 h-14 rounded-2xl border border-border flex items-center justify-center text-text-muted hover:text-primary hover:border-primary transition-all duration-300 group">
+                  <MessageCircle className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-24 pt-16 border-t border-border">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary font-black text-xl">
+                  Y
+                </div>
+                <div>
+                  <div className="text-sm font-bold text-text-muted uppercase tracking-widest mb-1">Escrito por</div>
+                  <div className="text-xl font-black text-text-primary tracking-tight">Time YAV Digital</div>
+                </div>
+              </div>
+              <Link 
+                to="/blog" 
+                className="inline-flex items-center gap-2 text-primary font-black text-lg hover:translate-x-2 transition-transform"
+              >
+                Ver mais artigos <ArrowRight className="w-5 h-5" />
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </motion.div>

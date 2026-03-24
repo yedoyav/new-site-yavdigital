@@ -1,9 +1,8 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ShoppingCart, Store, Zap, Waves, Building2, RefreshCw, Package, Heart, Box, Building, Music, Sparkles, CircleDot, Link as LinkIcon, BarChart2, Tag, MousePointerClick, Mail, Database, Share2, MessageCircle, Star } from 'lucide-react';
-import { clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { ArrowRight, Globe, Settings, Zap, CheckCircle2, ShoppingBag } from 'lucide-react';
 import { SEO } from '../components/SEO';
+import { Breadcrumbs } from '../components/Breadcrumbs';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -11,42 +10,54 @@ const fadeUp = {
 };
 
 export function Platforms() {
-  const sections = [
+  const categories = [
     {
-      title: 'Plataformas de loja virtual — Implantação',
-      items: [
-        { icon: ShoppingCart, bg: 'bg-[#E8F5E9]', title: 'Tray / Nuvemshop', desc: 'Crescimento inicial rápido' },
-        { icon: Store, bg: 'bg-[#EBF5FB]', title: 'Shopify', desc: 'Escalabilidade global' },
-        { icon: Zap, bg: 'bg-[#FEF9EC]', title: 'VTEX', desc: 'Enterprise e marketplace próprio' },
-        { icon: Waves, bg: 'bg-[#F5EEF8]', title: 'Wake', desc: 'Alto desempenho, made in Brazil' },
-        { icon: Building2, bg: 'bg-[#FEF3E2]', title: 'Marketplace In (VTEX)', desc: 'Transforme a loja em marketplace' },
-        { icon: RefreshCw, bg: 'bg-[#EEF2FF]', title: 'Migração de Plataforma', desc: 'SEO e histórico preservados' }
+      title: 'E-commerce',
+      icon: ShoppingBag,
+      color: 'text-primary',
+      bg: 'bg-primary/10',
+      platforms: [
+        'VTEX (IO & Legacy)',
+        'Tray',
+        'Tray Corp',
+        'Nuvemshop',
+        'Shopify',
+        'Wake',
+        'Linx',
+        'Magento (Adobe Commerce)',
+        'WooCommerce'
       ]
     },
     {
-      title: 'Marketplaces — Gestão e ADS',
-      items: [
-        { icon: Package, bg: 'bg-[#FEFCE8]', title: 'Mercado Livre', desc: 'Anúncios, FULL e reputação' },
-        { icon: Heart, bg: 'bg-[#FFF7ED]', title: 'Shopee', desc: 'Lives, cupons e datas duplas' },
-        { icon: Box, bg: 'bg-[#F0FFF4]', title: 'Amazon Brasil', desc: 'Buy Box, FBA e Sponsored' },
-        { icon: Building, bg: 'bg-[#EFF6FF]', title: 'Magalu', desc: 'Catálogo e campanhas' },
-        { icon: Music, bg: 'bg-[#FFF0F6]', title: 'TikTok Shop', desc: 'Social commerce e criativos' },
-        { icon: Sparkles, bg: 'bg-[#FAF0FE]', title: 'Shein', desc: 'Entrada, cadastro e gestão' },
-        { icon: CircleDot, bg: 'bg-[#FFF7ED]', title: 'Americanas', desc: 'Varejo nacional massivo' },
-        { icon: LinkIcon, bg: 'bg-[#F0FFF4]', title: 'Outros canais', desc: 'Via hubs de integração' }
+      title: 'Marketplaces',
+      icon: Globe,
+      color: 'text-emerald-500',
+      bg: 'bg-emerald-500/10',
+      platforms: [
+        'Mercado Livre',
+        'Amazon',
+        'Magalu',
+        'Shopee',
+        'Americanas / B2W',
+        'Casas Bahia / Via',
+        'Netshoes',
+        'Dafiti'
       ]
     },
     {
-      title: 'Ferramentas & integrações que utilizamos',
-      items: [
-        { icon: BarChart2, bg: 'bg-[#EFF6FF]', title: 'Google Analytics 4', desc: 'Rastreamento e funil de compra' },
-        { icon: Tag, bg: 'bg-[#F0FFF4]', title: 'Google Tag Manager', desc: 'Pixels, tags e eventos' },
-        { icon: MousePointerClick, bg: 'bg-[#FFF7ED]', title: 'Hotjar / Clarity', desc: 'Heatmaps e gravação de sessões' },
-        { icon: Mail, bg: 'bg-[#FFF0F6]', title: 'Klaviyo / RD Station', desc: 'E-mail e automações' },
-        { icon: Database, bg: 'bg-[#EFF6FF]', title: 'Bling / Tiny (ERP)', desc: 'Estoque, pedidos e cadastros' },
-        { icon: Share2, bg: 'bg-[#F0FFF4]', title: 'Anymarket / Plugg', desc: 'Hubs para múltiplos canais' },
-        { icon: MessageCircle, bg: 'bg-[#FFF7ED]', title: 'WhatsApp Business', desc: 'Atendimento e notificações' },
-        { icon: Star, bg: 'bg-[#FEFCE8]', title: 'Trustvox / Reclame Aqui', desc: 'Reviews e reputação' }
+      title: 'Ferramentas & Integrações',
+      icon: Settings,
+      color: 'text-amber-500',
+      bg: 'bg-amber-500/10',
+      platforms: [
+        'Bling / Tiny (ERP)',
+        'RD Station / Hubspot (CRM)',
+        'Klaviyo / Mailchimp',
+        'Google Analytics 4',
+        'Meta Ads / Google Ads',
+        'Enviou / Mailbiz',
+        'Melhor Envio / Frenet',
+        'PagSeguro / Mercado Pago'
       ]
     }
   ];
@@ -60,66 +71,119 @@ export function Platforms() {
     >
       <SEO 
         title="Plataformas" 
-        description="Trabalhamos com as melhores tecnologias do mercado: VTEX, Shopify, Mercado Livre, Amazon, Shopee e muito mais." 
+        description="Trabalhamos com as principais tecnologias do mercado de e-commerce e marketing digital." 
       />
-      <section className="pt-[110px] md:pt-[130px] pb-14 md:pb-[72px] px-5 md:px-[52px] bg-accent text-center relative overflow-hidden">
-        <div className="absolute -top-[40%] left-1/2 -translate-x-1/2 w-[700px] h-[600px] bg-[radial-gradient(ellipse,rgba(110,41,246,0.14)_0%,transparent_65%)] rounded-full pointer-events-none" />
+      
+      <section className="pt-[140px] pb-[80px] px-5 md:px-[52px] bg-accent relative overflow-hidden">
+        <div className="absolute w-[600px] h-[600px] bg-primary/20 rounded-full blur-[100px] -top-[150px] -left-[100px] pointer-events-none opacity-90" />
         <div className="absolute inset-0 pointer-events-none z-0 grain-overlay opacity-35" />
 
-        <div className="relative z-10">
-          <div className="inline-flex items-center gap-1.5 text-[12px] font-bold tracking-[0.12em] uppercase px-3.5 py-1.5 rounded-xl mb-4 font-mono bg-primary/20 text-white/85 border border-primary/35 before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-white/70 mx-auto">
-            Plataformas & Canais
+        <div className="max-w-[800px] relative z-10">
+          <div className="mb-8">
+            <Breadcrumbs items={[
+              { label: 'Plataformas' }
+            ]} />
           </div>
-          <h1 className="text-[clamp(32px,4vw,52px)] font-extrabold tracking-[-1.5px] leading-[1.06] text-white mb-3.5">
-            Sua operação integrada<br />nos melhores canais.
-          </h1>
-          <p className="text-base font-light text-white/70 leading-[1.78] max-w-[540px] mx-auto">
-            Dominamos as principais plataformas e marketplaces. Conectamos sua marca às principais plataformas com inteligência e controle.
-          </p>
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <div className="inline-flex items-center gap-1.5 text-[12px] font-bold tracking-[0.12em] uppercase px-3.5 py-1.5 rounded-xl mb-6 font-mono bg-primary/20 text-white/85 border border-primary/35 before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-white/70">
+              Ecossistema
+            </div>
+            <h1 className="text-[clamp(36px,5vw,64px)] font-extrabold tracking-[-2px] leading-[1.02] text-white mb-6">
+              Tecnologia de ponta para o seu <em className="text-primary not-italic text-glow">crescimento.</em>
+            </h1>
+            <p className="text-lg font-light text-white/70 leading-relaxed max-w-[600px]">
+              Não somos reféns de uma única ferramenta. Dominamos as principais plataformas do mercado para entregar a melhor solução para o seu momento de negócio.
+            </p>
+          </motion.div>
         </div>
       </section>
 
-      <div className="bg-background">
-        {sections.map((sec, i) => (
-          <section key={i} className="py-11 md:py-16 px-5 md:px-[52px] border-b border-border last:border-b-0 last:pb-20">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
-              variants={fadeUp}
-            >
-              <div className="text-[12px] font-bold tracking-[0.18em] uppercase text-primary font-mono mb-3.5 pb-2.5 border-b border-border">
-                {sec.title}
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
-                {sec.items.map((item, j) => (
-                  <div 
-                    key={j}
-                    className="bg-white border border-border rounded-[10px] p-4 flex items-center gap-3 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(110,41,246,0.07)] hover:border-primary/20"
-                  >
-                    <div className={twMerge("w-9 h-9 rounded-[10px] flex items-center justify-center shrink-0", item.bg)}>
-                      <item.icon className="w-4 h-4 text-text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="text-[13px] font-bold text-text-primary mb-0.5 leading-tight">{item.title}</h4>
-                      <p className="text-[12px] text-text-secondary font-light leading-[1.4]">{item.desc}</p>
-                    </div>
+      <section className="py-20 md:py-32 px-5 md:px-[52px] bg-background">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {categories.map((cat, i) => (
+              <motion.div 
+                key={i}
+                className="bg-white border border-border rounded-[32px] p-8 md:p-10 shadow-sm hover:shadow-[0_24px_64px_rgba(0,0,0,0.06)] transition-all duration-500 group"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                variants={fadeUp}
+                custom={i}
+              >
+                <div className="flex items-center gap-4 mb-8">
+                  <div className={`w-14 h-14 rounded-2xl ${cat.bg} flex items-center justify-center ${cat.color} transition-transform group-hover:scale-110 duration-500`}>
+                    <cat.icon className="w-7 h-7" />
                   </div>
-                ))}
-              </div>
-            </motion.div>
-          </section>
-        ))}
-      </div>
+                  <h2 className="text-2xl font-bold text-text-primary tracking-tight">
+                    {cat.title}
+                  </h2>
+                </div>
 
-      <section className="bg-gradient-to-br from-primary to-[#9B5BFF] py-[60px] md:py-20 px-5 md:px-[52px] flex flex-col md:flex-row items-center justify-between gap-9 relative overflow-hidden text-center md:text-left">
-        <div className="absolute -top-[60px] -right-[60px] w-[300px] h-[300px] rounded-full bg-white/5 pointer-events-none" />
-        <h2 className="text-[clamp(22px,3vw,40px)] font-extrabold text-white tracking-[-0.8px] leading-[1.08] max-w-[500px] relative">
-          Não encontrou sua plataforma? Fale com a gente.
-        </h2>
-        <Link to="/contato" className="inline-flex items-center gap-2 bg-accent text-white px-7 py-[13px] rounded-xl font-semibold text-sm transition-all duration-200 hover:opacity-80 hover:-translate-y-0.5">
-          Conversar <ArrowRight className="w-3 h-3" />
-        </Link>
+                <ul className="space-y-4">
+                  {cat.platforms.map((plat, j) => (
+                    <li key={j} className="flex items-center gap-3 text-text-secondary group/item">
+                      <CheckCircle2 className={`w-4 h-4 ${cat.color} opacity-40 group-hover/item:opacity-100 transition-opacity`} />
+                      <span className="text-[15px] font-medium group-hover/item:text-text-primary transition-colors">{plat}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div 
+            className="mt-20 p-8 md:p-12 bg-accent rounded-[40px] relative overflow-hidden group"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(110,41,246,0.15),transparent_50%)]" />
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
+              <div className="max-w-[600px]">
+                <div className="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-widest mb-4 font-mono">
+                  <Zap className="w-4 h-4" />
+                  Especialistas VTEX
+                </div>
+                <h3 className="text-3xl md:text-4xl font-black text-white mb-4 tracking-tight">
+                  Sua loja em uma das maiores plataformas do mundo.
+                </h3>
+                <p className="text-white/60 font-light text-lg">
+                  Somos parceiros especialistas no ecossistema VTEX, prontos para implementar, evoluir e escalar sua operação com o que há de mais moderno em tecnologia para e-commerce.
+                </p>
+              </div>
+              <Link 
+                to="/contato" 
+                className="shrink-0 bg-white text-accent px-10 py-5 rounded-2xl font-bold text-lg hover:bg-primary hover:text-white transition-all duration-300 hover:-translate-y-1 shadow-xl"
+              >
+                Falar com especialista
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="py-24 px-5 md:px-[52px] bg-background border-t border-border">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-5xl font-black text-text-primary mb-8 tracking-tight">
+            Não encontrou sua plataforma?
+          </h2>
+          <p className="text-xl text-text-secondary font-light mb-12">
+            Nosso time técnico tem experiência com dezenas de outras ferramentas e integrações customizadas via API. Vamos conversar sobre o seu cenário específico.
+          </p>
+          <Link 
+            to="/contato" 
+            className="inline-flex items-center gap-2 text-primary font-bold text-lg group"
+          >
+            Entrar em contato agora
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform" />
+          </Link>
+        </div>
       </section>
     </motion.div>
   );

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { servicesData } from '../data/services';
@@ -29,18 +30,20 @@ export function Navbar() {
     { name: 'Serviços', path: '/servicos', hasDropdown: true },
     { name: 'Como Trabalhamos', path: '/metodologia' },
     { name: 'Plataformas', path: '/plataformas' },
+    { name: 'Cases', path: '/cases' },
     { name: 'Blog', path: '/blog' },
   ];
 
   return (
     <>
       <nav
+        aria-label="Navegação principal"
         className={twMerge(
           'fixed top-0 left-0 right-0 h-[68px] z-[800] flex items-center justify-between px-5 md:px-[52px] transition-all duration-300',
           isScrolled && 'bg-accent/95 backdrop-blur-xl shadow-[0_1px_0_rgba(255,255,255,0.06)]'
         )}
       >
-        <Link to="/" className="hover:opacity-75 transition-opacity">
+        <Link to="/" className="hover:opacity-75 transition-opacity" aria-label="Página inicial YAV Digital">
           <img
             src="https://yavdigital.com.br/wp-content/uploads/2025/02/yav-logo-1.webp"
             alt="YAV Digital"
@@ -48,11 +51,14 @@ export function Navbar() {
           />
         </Link>
 
-        <ul className="hidden md:flex items-center gap-[30px]">
+        <ul className="hidden md:flex items-center gap-[30px]" role="menubar">
           {navLinks.map((link) => (
-            <li key={link.path} className={link.hasDropdown ? "relative group" : ""}>
+            <li key={link.path} className={link.hasDropdown ? "relative group" : ""} role="none">
               <Link
                 to={link.path}
+                role="menuitem"
+                aria-haspopup={link.hasDropdown ? "true" : undefined}
+                aria-expanded={link.hasDropdown ? false : undefined}
                 className={twMerge(
                   'text-sm font-medium tracking-[0.01em] relative transition-colors duration-200 flex items-center gap-1 text-white hover:text-white/80',
                   'after:content-[""] after:absolute after:-bottom-0.5 after:left-0 after:right-0 after:h-[1.5px] after:bg-primary after:scale-x-0 after:origin-left after:transition-transform after:duration-300',
@@ -61,16 +67,21 @@ export function Navbar() {
                 )}
               >
                 {link.name}
-                {link.hasDropdown && <ChevronDown className="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180" />}
+                {link.hasDropdown && <ChevronDown className="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180" aria-hidden="true" />}
               </Link>
               
               {link.hasDropdown && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-6 opacity-0 translate-y-2 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible transition-all duration-300 w-[320px]">
+                <div 
+                  className="absolute top-full left-1/2 -translate-x-1/2 pt-6 opacity-0 translate-y-2 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible transition-all duration-300 w-[320px]"
+                  role="menu"
+                  aria-label="Submenu de Serviços"
+                >
                   <div className="bg-white rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.08)] border border-border p-2.5 flex flex-col gap-1 relative before:content-[''] before:absolute before:-top-2 before:left-1/2 before:-translate-x-1/2 before:border-8 before:border-transparent before:border-b-white">
                     {servicesData.map((svc) => (
                       <Link
                         key={svc.id}
                         to={`/servicos/${svc.id}`}
+                        role="menuitem"
                         className="flex flex-col p-3 rounded-xl hover:bg-background transition-colors group/item"
                       >
                         <span className="text-sm font-bold text-text-primary group-hover/item:text-primary transition-colors mb-0.5">
@@ -107,14 +118,20 @@ export function Navbar() {
         <button
           className="md:hidden p-2 relative z-[801] text-white"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle menu"
+          aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-menu"
         >
-          {isMobileMenuOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6" />}
+          {isMobileMenuOpen ? <X className="w-6 h-6 text-white" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
         </button>
       </nav>
 
       {/* Mobile Menu Overlay */}
       <div
+        id="mobile-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu de navegação mobile"
         className={twMerge(
           'fixed inset-0 bg-accent z-[700] flex flex-col items-center justify-center gap-6 transition-all duration-500 overflow-y-auto py-20',
           isMobileMenuOpen ? 'translate-x-0 opacity-100 visible' : 'translate-x-full opacity-0 invisible'
@@ -126,33 +143,41 @@ export function Navbar() {
               <div className="flex flex-col items-center w-full">
                 <button
                   onClick={() => setIsServicesOpen(!isServicesOpen)}
+                  aria-expanded={isServicesOpen}
+                  aria-controls="mobile-services-menu"
                   className="text-[26px] font-extrabold text-white hover:text-primary-light transition-colors tracking-tight flex items-center gap-2"
                 >
                   {link.name}
-                  <ChevronDown className={twMerge("w-6 h-6 transition-transform duration-300", isServicesOpen && "rotate-180")} />
+                  <ChevronDown className={twMerge("w-6 h-6 transition-transform duration-300", isServicesOpen && "rotate-180")} aria-hidden="true" />
                 </button>
-                <div 
-                  className={twMerge(
-                    "flex flex-col items-center gap-4 overflow-hidden transition-all duration-300 w-full",
-                    isServicesOpen ? "max-h-[500px] mt-6 opacity-100" : "max-h-0 mt-0 opacity-0"
-                  )}
-                >
-                  {servicesData.map((svc) => (
-                    <Link
-                      key={svc.id}
-                      to={`/servicos/${svc.id}`}
-                      className="text-base font-medium text-white/70 hover:text-white text-center"
+                <AnimatePresence>
+                  {isServicesOpen && (
+                    <motion.div
+                      id="mobile-services-menu" 
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                      className="flex flex-col items-center gap-4 overflow-hidden w-full mt-6"
                     >
-                      {svc.title}
-                    </Link>
-                  ))}
-                  <Link
-                    to="/servicos"
-                    className="text-sm font-bold text-primary mt-2"
-                  >
-                    Ver todos os serviços
-                  </Link>
-                </div>
+                      {servicesData.map((svc) => (
+                        <Link
+                          key={svc.id}
+                          to={`/servicos/${svc.id}`}
+                          className="text-base font-medium text-white/70 hover:text-white text-center"
+                        >
+                          {svc.title}
+                        </Link>
+                      ))}
+                      <Link
+                        to="/servicos"
+                        className="text-sm font-bold text-primary mt-2"
+                      >
+                        Ver todos os serviços
+                      </Link>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             ) : (
               <Link

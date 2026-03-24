@@ -2,8 +2,8 @@ export const servicesData = [
   {
     id: 'implantacao-ecommerce',
     num: '01',
-    type: 'Implantação',
-    title: 'Implantação de E-commerce',
+    type: 'Implementação',
+    title: 'Implementação de E-commerce',
     subtitle: 'Projeto pontual — do planejamento ao go-live, sem surpresas e sem escopo aberto.',
     desc: 'Do planejamento ao go-live, sem escopo aberto e sem surpresas. Criamos ou migramos sua loja com layout, integrações, produtos e analytics configurados — pronta para operar com excelência.',
     tags: ['Tray', 'Shopify', 'VTEX', 'Wake', 'Marketplace In'],
@@ -17,7 +17,8 @@ export const servicesData = [
       'Documentação e handoff para a gestão'
     ],
     platforms: [
-      'Tray / Nuvemshop',
+      'Tray',
+      'Nuvemshop',
       'Shopify',
       'VTEX',
       'Wake',
@@ -37,8 +38,9 @@ export const servicesData = [
       'Autonomia para a sua equipe operar a plataforma.'
     ],
     faq: [
-      { q: 'Quanto tempo leva uma implantação?', a: 'O prazo varia de acordo com a complexidade e a plataforma escolhida, mas geralmente projetos levam de 45 a 90 dias.' },
-      { q: 'Vocês fazem migração de plataforma?', a: 'Sim. Realizamos migrações seguras, com foco em não perder relevância em SEO (redirecionamentos 301) e garantindo a integridade dos dados.' },
+      { q: 'Na implementação, por que eu deveria contratar a YAV e não uma agência tradicional?', a: 'Diferente de uma agência tradicional que foca apenas no front-end e apenas aponta o que precisa ser feito no restante, a YAV atua de ponta a ponta. Nós não apenas apontamos, nós executamos: desde a escolha das melhores ferramentas para o seu negócio até a configuração completa e todo o desenho da operação.' },
+      { q: 'Quanto tempo leva uma implementação?', a: 'O prazo varia de acordo com a complexidade e a plataforma escolhida, mas geralmente projetos levam de 45 a 90 dias.' },
+      { q: 'Vocês fazem migração de plataforma?', a: 'Sim. Realizamos migrações seguras, com foco em manter a integridade dos dados e garantir que sua nova operação comece com máxima eficiência.' },
       { q: 'O layout é exclusivo?', a: 'Trabalhamos tanto com temas premium customizados quanto com layouts 100% exclusivos, dependendo do seu orçamento e necessidade.' }
     ],
     note: 'Projeto pontual com início e fim definidos. Entregamos a loja pronta para operar com eficiência.'
@@ -98,7 +100,7 @@ export const servicesData = [
     desc: 'CRO, SEO, e-mail marketing, conteúdo e integrações. Inteligência aplicada, processos estruturados e evolução contínua da sua loja.',
     tags: ['CRO', 'SEO', 'E-mail', 'Analytics'],
     includes: [
-      'Diagnóstico CRO, UX, SEO e velocidade',
+      'Auditoria de CRO, UX, SEO e velocidade',
       'Otimização de PDP, PLP e checkout',
       'Heatmaps e análise comportamental',
       'Estratégia de SEO e conteúdo',
@@ -116,7 +118,7 @@ export const servicesData = [
       'Trustvox, Reclame Aqui'
     ],
     howItWorks: [
-      { step: '01', title: 'Diagnóstico Profundo', desc: 'Auditoria de UX/UI, análise de dados no GA4 e identificação de gargalos de conversão.' },
+      { step: '01', title: 'Auditoria e Imersão', desc: 'Auditoria de UX/UI, análise de dados no GA4 e identificação de gargalos de conversão.' },
       { step: '02', title: 'Plano de Ação (Roadmap)', desc: 'Priorização de melhorias baseada em impacto vs. esforço. Definição de KPIs claros.' },
       { step: '03', title: 'Execução Contínua', desc: 'Implementação de testes A/B, melhorias de SEO, criação de réguas de relacionamento e otimização de vitrines.' },
       { step: '04', title: 'Análise & Iteração', desc: 'Revisão mensal dos resultados, aprendizados e ajuste de rota para o próximo ciclo.' }
@@ -129,7 +131,7 @@ export const servicesData = [
     ],
     faq: [
       { q: 'Vocês fazem a gestão de mídia (Tráfego Pago)?', a: 'Nosso foco na Gestão de E-commerce é na conversão e retenção (CRO, SEO, CRM). Trabalhamos em parceria com sua agência de performance para maximizar o ROAS.' },
-      { q: 'Qual a diferença entre Implantação e Gestão?', a: 'A implantação cria a loja. A gestão faz a loja vender mais e melhor todos os dias, otimizando a operação continuamente.' },
+      { q: 'Qual a diferença entre Implementação e Gestão?', a: 'A implementação cria a loja. A gestão faz a loja vender mais e melhor todos os dias, otimizando a operação continuamente.' },
       { q: 'Como medimos o sucesso?', a: 'Através de dashboards personalizados acompanhando métricas como Taxa de Conversão, Ticket Médio, CAC, LTV e Receita por Canal.' }
     ],
     note: 'Serviço recorrente. A inteligência e a eficiência se acumulam e compõem com o tempo.'
@@ -195,10 +197,15 @@ export const servicesData = [
       'Revisão, QA e publicação'
     ],
     platforms: [
-      'Tray / Nuvemshop e Shopify',
-      'VTEX e Wake',
-      'Mercado Livre e Shopee',
-      'Amazon e Magalu'
+      'Tray',
+      'Nuvemshop',
+      'Shopify',
+      'VTEX',
+      'Wake',
+      'Mercado Livre',
+      'Shopee',
+      'Amazon',
+      'Magalu'
     ],
     howItWorks: [
       { step: '01', title: 'Coleta de Dados', desc: 'Recebimento de planilhas, fotos e informações brutas dos fornecedores ou do seu time.' },
@@ -218,5 +225,5 @@ export const servicesData = [
       { q: 'O cadastro é feito direto no marketplace?', a: 'Preferencialmente fazemos no seu ERP (Bling, Tiny) ou Plataforma de E-commerce, para que reflita em todos os canais integrados.' }
     ],
     note: 'Automação + expertise de cada canal. Escala em massa sem abrir mão da qualidade.'
-  }
+  },
 ];

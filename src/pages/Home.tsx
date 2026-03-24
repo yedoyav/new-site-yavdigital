@@ -1,11 +1,12 @@
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Check, X, ArrowUpRight, Target, BarChart2, Link as LinkIcon, Zap, Shield, Rocket, Hexagon, Triangle, Circle, Box, Cloud, Feather } from 'lucide-react';
+import { ArrowRight, Check, X, ArrowUpRight, Target, BarChart2, Link as LinkIcon, Zap, Shield, Rocket, Hexagon, Triangle, Circle, Box, Cloud, Feather, ExternalLink, AlertCircle, Clock, ShieldAlert, UserMinus, CheckCircle2, TrendingUp, BrainCircuit, Layers } from 'lucide-react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { useEffect, useState } from 'react';
 import { blogPosts } from '../data/blog';
 import { SEO } from '../components/SEO';
+import { casesData } from '../data/cases';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -37,7 +38,7 @@ export function Home() {
     "alternateName": "YAV",
     "url": "https://yavdigital.com.br",
     "logo": "https://yavdigital.com.br/logo.png",
-    "description": "Especialistas em operação de e-commerce e marketplaces. Implantação, gestão e inteligência para VTEX, Shopify, Mercado Livre e Amazon.",
+    "description": "Especialistas em operação de e-commerce e marketplaces. Implementação, gestão e inteligência para VTEX, Shopify, Mercado Livre e Amazon.",
     "address": {
       "@type": "PostalAddress",
       "addressCountry": "BR",
@@ -61,7 +62,7 @@ export function Home() {
       "itemListElement": [
         {
           "@type": "Service",
-          "name": "Implantação de E-commerce",
+          "name": "Implementação de E-commerce",
           "description": "Projeto pontual do planejamento ao go-live em plataformas como VTEX, Shopify e Tray."
         },
         {
@@ -87,6 +88,8 @@ export function Home() {
       ]
     }
   };
+
+  const [activeCase, setActiveCase] = useState(casesData[0].id);
 
   return (
     <motion.div
@@ -124,30 +127,43 @@ export function Home() {
           </p>
           <div className="flex flex-wrap items-center gap-3">
             <Link to="/contato" className="inline-flex items-center gap-2 bg-primary text-white px-7 py-[13px] rounded-xl font-semibold text-sm transition-all duration-200 hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(110,41,246,0.32)]">
-              Agendar diagnóstico gratuito
+              Agendar conversa estratégica
               <ArrowRight className="w-3 h-3" />
             </Link>
             <Link to="/servicos" className="inline-flex items-center gap-2 bg-transparent text-white border-[1.5px] border-white/50 px-7 py-[13px] rounded-xl font-semibold text-sm transition-all duration-200 hover:bg-white/10 hover:border-white hover:-translate-y-0.5">
               Ver serviços
             </Link>
           </div>
+
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5, duration: 1 }}
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2"
+          >
+            <span className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] font-mono">Explorar</span>
+            <div className="w-px h-12 bg-gradient-to-b from-primary/60 to-transparent" />
+          </motion.div>
         </div>
 
-        <div className="relative z-10 bg-white/5 border border-white/10 rounded-[20px] p-5 md:p-[30px] backdrop-blur-md">
-          <div className="text-[12px] font-semibold text-white/50 tracking-[0.16em] uppercase font-mono mb-4">
+        <div className="relative z-10 bg-white/5 border border-white/10 rounded-[20px] p-5 md:p-[30px] backdrop-blur-md animate-[float_6s_ease-in-out_infinite]">
+          <div className="text-[12px] font-semibold text-white/50 tracking-[0.16em] uppercase font-mono mb-4 flex items-center gap-2">
+            <span className="w-1 h-1 bg-primary rounded-full" />
             Nossos serviços
           </div>
           <div className="flex flex-col gap-[7px] mb-5">
             {[
-              { color: '#00D48A', name: 'Implantação de E-commerce', slug: 'implantacao-ecommerce' },
-              { color: '#6E29F6', name: 'Consultoria & Gestão de Marketplace', slug: 'gestao-marketplace' },
-              { color: '#9B5BFF', name: 'Consultoria & Gestão de E-commerce', slug: 'gestao-ecommerce' },
-              { color: '#F59E0B', name: 'Gestão de ADS em Marketplaces', slug: 'gestao-ads' },
-              { color: '#F87171', name: 'Cadastro de Produtos', slug: 'cadastro-produtos' },
+              { color: '#00D48A', name: 'Implementação de E-commerce', slug: 'implantacao-ecommerce', icon: <Rocket className="w-3.5 h-3.5" /> },
+              { color: '#6E29F6', name: 'Gestão de Marketplace', slug: 'gestao-marketplace', icon: <Target className="w-3.5 h-3.5" /> },
+              { color: '#9B5BFF', name: 'Gestão de E-commerce', slug: 'gestao-ecommerce', icon: <BarChart2 className="w-3.5 h-3.5" /> },
+              { color: '#F59E0B', name: 'Gestão de ADS', slug: 'gestao-ads', icon: <Zap className="w-3.5 h-3.5" /> },
+              { color: '#F87171', name: 'Cadastro de Produtos', slug: 'cadastro-produtos', icon: <Box className="w-3.5 h-3.5" /> },
             ].map((svc) => (
-              <Link key={svc.name} to={`/servicos/${svc.slug}`} className="flex items-center gap-[11px] bg-white/5 border border-white/5 rounded-[10px] px-3.5 py-[11px] transition-all duration-200 hover:bg-white/10 hover:border-primary/30 hover:translate-x-1">
-                <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: svc.color }} />
-                <span className="text-[13px] text-white/75 font-normal">{svc.name}</span>
+              <Link key={svc.name} to={`/servicos/${svc.slug}`} className="group flex items-center gap-[11px] bg-white/5 border border-white/5 rounded-[10px] px-3.5 py-[11px] transition-all duration-300 hover:bg-white/10 hover:border-primary/30 hover:translate-x-1">
+                <div className="w-6 h-6 rounded-lg flex items-center justify-center transition-colors group-hover:bg-white/10" style={{ color: svc.color }}>
+                  {svc.icon}
+                </div>
+                <span className="text-[13px] text-white/75 font-normal group-hover:text-white transition-colors">{svc.name}</span>
               </Link>
             ))}
           </div>
@@ -181,22 +197,26 @@ export function Home() {
       </section>
 
       {/* Marquee */}
-      <div className="bg-primary py-3 overflow-hidden whitespace-nowrap">
-        <div className="inline-flex animate-[mq_36s_linear_infinite] hover:[animation-play-state:paused]">
+      <div className="bg-accent py-5 overflow-hidden whitespace-nowrap border-y border-white/5 relative">
+        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-accent to-transparent z-10" />
+        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-accent to-transparent z-10" />
+        <div className="inline-flex animate-[mq_40s_linear_infinite] hover:[animation-play-state:paused]">
           {[...Array(2)].map((_, i) => (
             <div key={i} className="inline-flex items-center">
-              <span className="inline-flex items-center gap-[9px] px-[22px] text-[12px] font-bold tracking-[0.12em] uppercase text-white font-mono">Mercado Livre</span><span className="text-white/20 px-1">·</span>
-              <span className="inline-flex items-center gap-[9px] px-[22px] text-[12px] font-bold tracking-[0.12em] uppercase text-white/55 font-mono">Shopee</span><span className="text-white/20 px-1">·</span>
-              <span className="inline-flex items-center gap-[9px] px-[22px] text-[12px] font-bold tracking-[0.12em] uppercase text-white/55 font-mono">Amazon</span><span className="text-white/20 px-1">·</span>
-              <span className="inline-flex items-center gap-[9px] px-[22px] text-[12px] font-bold tracking-[0.12em] uppercase text-white/55 font-mono">Magalu</span><span className="text-white/20 px-1">·</span>
-              <span className="inline-flex items-center gap-[9px] px-[22px] text-[12px] font-bold tracking-[0.12em] uppercase text-white/55 font-mono">TikTok Shop</span><span className="text-white/20 px-1">·</span>
-              <span className="inline-flex items-center gap-[9px] px-[22px] text-[12px] font-bold tracking-[0.12em] uppercase text-white font-mono">Shopify</span><span className="text-white/20 px-1">·</span>
-              <span className="inline-flex items-center gap-[9px] px-[22px] text-[12px] font-bold tracking-[0.12em] uppercase text-white/55 font-mono">VTEX</span><span className="text-white/20 px-1">·</span>
-              <span className="inline-flex items-center gap-[9px] px-[22px] text-[12px] font-bold tracking-[0.12em] uppercase text-white/55 font-mono">Wake</span><span className="text-white/20 px-1">·</span>
-              <span className="inline-flex items-center gap-[9px] px-[22px] text-[12px] font-bold tracking-[0.12em] uppercase text-white/55 font-mono">Tray</span><span className="text-white/20 px-1">·</span>
-              <span className="inline-flex items-center gap-[9px] px-[22px] text-[12px] font-bold tracking-[0.12em] uppercase text-white/55 font-mono">Nuvemshop</span><span className="text-white/20 px-1">·</span>
-              <span className="inline-flex items-center gap-[9px] px-[22px] text-[12px] font-bold tracking-[0.12em] uppercase text-white font-mono">Shein</span><span className="text-white/20 px-1">·</span>
-              <span className="inline-flex items-center gap-[9px] px-[22px] text-[12px] font-bold tracking-[0.12em] uppercase text-white/55 font-mono">Americanas</span><span className="text-white/20 px-1">·</span>
+              {[
+                'Mercado Livre', 'Shopee', 'Amazon', 'Magalu', 'TikTok Shop', 
+                'Shopify', 'VTEX', 'Wake', 'Tray', 'Nuvemshop', 'Shein', 'Americanas'
+              ].map((brand, j) => (
+                <div key={j} className="inline-flex items-center">
+                  <span className={twMerge(
+                    "px-10 text-[14px] font-black tracking-tight uppercase font-mono transition-colors",
+                    j % 3 === 0 ? "text-white" : "text-white/30 hover:text-white/60"
+                  )}>
+                    {brand}
+                  </span>
+                  <span className="text-primary font-bold text-lg opacity-40">/</span>
+                </div>
+              ))}
             </div>
           ))}
         </div>
@@ -243,15 +263,16 @@ export function Home() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-3.5">
+        <div className="flex flex-wrap justify-center gap-3.5">
           {[
             {
-              num: '01 — Implantação',
-              title: 'Implantação de E-commerce',
+              num: '01 — Implementação',
+              title: 'Implementação de E-commerce',
               desc: 'Do planejamento ao go-live, sem escopo aberto e sem surpresas. Criamos ou migramos sua loja com layout, integrações, produtos e analytics configurados — pronta para operar com excelência.',
-              tags: ['Tray', 'Shopify', 'VTEX', 'Wake', 'Marketplace In'],
+              tags: ['Tray', 'Nuvemshop', 'Shopify', 'VTEX', 'Wake'],
               delay: 0.08,
-              slug: 'implantacao-ecommerce'
+              slug: 'implantacao-ecommerce',
+              icon: <Rocket className="w-5 h-5" />
             },
             {
               num: '02 — Recorrente',
@@ -259,7 +280,8 @@ export function Home() {
               desc: 'Operação completa dos canais mês a mês. Cadastros, precificação, saúde da conta, ADS e reporte consolidado. Você foca no negócio — a gente assume a operação.',
               tags: ['ML', 'Shopee', 'Amazon', 'Magalu', 'TikTok Shop'],
               delay: 0.16,
-              slug: 'gestao-marketplace'
+              slug: 'gestao-marketplace',
+              icon: <Target className="w-5 h-5" />
             },
             {
               num: '03 — Recorrente',
@@ -267,7 +289,8 @@ export function Home() {
               desc: 'CRO, SEO, e-mail marketing, conteúdo e integrações. Inteligência aplicada, processos estruturados e evolução contínua da sua loja.',
               tags: ['CRO', 'SEO', 'E-mail', 'Analytics'],
               delay: 0.24,
-              slug: 'gestao-ecommerce'
+              slug: 'gestao-ecommerce',
+              icon: <BarChart2 className="w-5 h-5" />
             },
             {
               num: '04 — Standalone',
@@ -275,7 +298,8 @@ export function Home() {
               desc: 'Gestão de mídia com foco em eficiência. Estratégia, execução e otimização contínua para gerar inteligência e economia nos seus investimentos.',
               tags: ['ML Ads', 'Amazon Ads', 'Shopee Ads'],
               delay: 0.32,
-              slug: 'gestao-ads'
+              slug: 'gestao-ads',
+              icon: <Zap className="w-5 h-5" />
             },
             {
               num: '05 — Standalone',
@@ -283,12 +307,16 @@ export function Home() {
               desc: 'Cadastros completos com automação e expertise. Títulos otimizados, descrições persuasivas e categorização correta para SEO e conversão.',
               tags: ['Bling', 'Tiny', 'SEO', 'Copywriting'],
               delay: 0.40,
-              slug: 'cadastro-produtos'
+              slug: 'cadastro-produtos',
+              icon: <Box className="w-5 h-5" />
             }
           ].map((svc, i) => (
             <motion.div
               key={i}
-              className={i < 3 ? "md:col-span-1 lg:col-span-2" : i === 4 ? "md:col-span-2 lg:col-span-3" : "md:col-span-1 lg:col-span-3"}
+              className={twMerge(
+                "group relative bg-white rounded-3xl p-8 border border-border transition-all duration-500 hover:shadow-[0_24px_64px_rgba(0,0,0,0.06)] hover:-translate-y-1 overflow-hidden",
+                "w-full md:w-[calc(50%-14px)] lg:w-[calc(33.333%-14px)]"
+              )}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
@@ -297,29 +325,44 @@ export function Home() {
                 visible: { opacity: 1, y: 0, transition: { duration: 0.65, delay: svc.delay, ease: [0.16, 1, 0.3, 1] } }
               }}
             >
-              <Link to={`/servicos/${svc.slug}`} className="group block bg-white rounded-2xl p-[30px] border border-border relative overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_48px_rgba(110,41,246,0.1)] h-full flex flex-col">
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary via-[#9B5BFF] to-[#C084FC] opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-0" />
-                <div className="absolute inset-[1.5px] rounded-[calc(20px-1.5px)] bg-white z-0" />
-                
-                <div className="relative z-10 flex flex-col h-full">
-                  <div className="text-[12px] font-bold tracking-[0.2em] text-primary uppercase font-mono mb-3">
-                    {svc.num}
-                  </div>
-                  <h3 className="text-lg font-bold text-text-primary mb-2 tracking-[-0.2px] leading-[1.22]">
-                    {svc.title}
-                  </h3>
-                  <p className="text-sm text-text-secondary leading-[1.65] mb-4 font-light flex-grow">
-                    {svc.desc}
-                  </p>
-                  <div className="flex flex-wrap gap-1.5 mt-auto">
-                    {svc.tags.map(tag => (
-                      <span key={tag} className="text-[12px] font-bold px-2.5 py-1 rounded-xl bg-primary-light text-primary tracking-[0.04em]">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+              <div className="absolute top-0 right-0 p-8 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-500">
+                <div className="scale-[4] origin-top-right">
+                  {svc.icon}
                 </div>
-              </Link>
+              </div>
+
+              <div className="relative z-10">
+                <div className="w-12 h-12 rounded-2xl bg-primary/5 flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                  {svc.icon}
+                </div>
+                
+                <div className="text-[11px] font-bold tracking-[0.2em] uppercase text-text-muted mb-3 font-mono">
+                  {svc.num}
+                </div>
+                
+                <h3 className="text-xl font-bold text-text-primary mb-4 leading-tight group-hover:text-primary transition-colors">
+                  {svc.title}
+                </h3>
+                
+                <p className="text-[14px] text-text-secondary leading-relaxed mb-8 font-light">
+                  {svc.desc}
+                </p>
+                
+                <div className="flex flex-wrap gap-1.5 mb-8">
+                  {svc.tags.map((tag) => (
+                    <span key={tag} className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-background text-text-muted border border-border group-hover:border-primary/20 group-hover:text-primary/70 transition-colors">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <Link 
+                  to={`/servicos/${svc.slug}`}
+                  className="inline-flex items-center gap-2 text-[13px] font-bold text-text-primary hover:text-primary transition-colors group/link"
+                >
+                  Saiba mais <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-1" />
+                </Link>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -414,7 +457,7 @@ export function Home() {
               av: "C", name: "Camila S.", role: "CMO · Cosméticos", delay: 0.16
             },
             {
-              q: "Saímos de zero para 5 marketplaces funcionando em menos de 60 dias. A implantação foi impecável.",
+              q: "Saímos de zero para 5 marketplaces funcionando em menos de 60 dias. A implementação foi impecável.",
               av: "F", name: "Fernando L.", role: "CEO · Eletrônicos", delay: 0.24
             }
           ].map((t, i) => (
@@ -453,6 +496,104 @@ export function Home() {
         </div>
       </section>
 
+      {/* Cases Section */}
+      <section className="py-20 md:py-32 px-5 md:px-[52px] bg-white border-b border-border">
+        <motion.div 
+          className="flex flex-col md:flex-row items-end justify-between gap-8 mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeUp}
+        >
+          <div className="max-w-[600px]">
+            <div className="inline-flex items-center gap-1.5 text-[12px] font-bold tracking-[0.12em] uppercase px-3.5 py-1.5 rounded-xl mb-4 font-mono bg-primary-light text-primary before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-primary">
+              Performance & Resultados
+            </div>
+            <h2 className="text-[clamp(36px,5vw,64px)] font-black tracking-[-2px] leading-[1.06] text-text-primary">
+              Confira alguns <em className="text-primary not-italic">cases de sucesso.</em>
+            </h2>
+          </div>
+          <Link to="/cases" className="inline-flex items-center gap-2 bg-primary text-white px-7 py-[13px] rounded-xl font-semibold text-sm transition-all duration-200 hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(110,41,246,0.32)]">
+            Ver todos os cases <ArrowRight className="w-3 h-3" />
+          </Link>
+        </motion.div>
+
+        <div className="flex flex-col lg:flex-row h-[600px] lg:h-[640px] w-full overflow-hidden rounded-3xl border border-border bg-black shadow-2xl">
+          {casesData.slice(0, 4).map((caseItem, i) => (
+            <motion.div
+              key={caseItem.id}
+              onMouseEnter={() => setActiveCase(caseItem.id)}
+              className={twMerge(
+                "relative cursor-pointer overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                activeCase === caseItem.id ? "flex-[3.5]" : "flex-1"
+              )}
+            >
+              {/* Background Image */}
+              <img 
+                src={caseItem.image} 
+                alt={caseItem.client} 
+                className={twMerge(
+                  "absolute inset-0 h-full w-full object-cover transition-all duration-1000",
+                  activeCase === caseItem.id ? "scale-105 grayscale-0 opacity-100" : "grayscale opacity-40 hover:opacity-60"
+                )}
+                referrerPolicy="no-referrer"
+                loading="lazy"
+              />
+              
+              {/* Overlay Gradient */}
+              <div className={twMerge(
+                "absolute inset-0 transition-opacity duration-700",
+                activeCase === caseItem.id ? "bg-gradient-to-t from-black/95 via-black/40 to-transparent" : "bg-black/20"
+              )} />
+
+              {/* Content */}
+              <div className="absolute inset-0 p-6 lg:p-10 flex flex-col justify-end">
+                <AnimatePresence mode="wait">
+                  {activeCase === caseItem.id ? (
+                    <motion.div
+                      key="active"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 15 }}
+                      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                      className="max-w-[440px]"
+                    >
+                      <h3 className="text-2xl lg:text-[32px] font-black text-white mb-4 tracking-tight leading-[1.1]">
+                        {caseItem.title}
+                      </h3>
+                      <p className="text-sm lg:text-base text-white/70 mb-8 font-light leading-relaxed line-clamp-3">
+                        {caseItem.subtitle}
+                      </p>
+                      <Link 
+                        to={`/cases/${caseItem.id}`} 
+                        className="inline-flex items-center gap-2 bg-primary text-white px-7 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 hover:bg-primary-dark hover:scale-105 hover:shadow-[0_10px_30px_rgba(110,41,246,0.3)]"
+                      >
+                        Conheça o case <ExternalLink className="w-4 h-4" />
+                      </Link>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="inactive"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="w-full flex justify-center lg:justify-start"
+                    >
+                      <span className="text-xl lg:text-2xl font-black text-white/40 uppercase tracking-tighter whitespace-nowrap transition-colors group-hover:text-white/60">
+                        {caseItem.client}
+                      </span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Vertical Divider */}
+              <div className="absolute right-0 top-12 bottom-12 w-px bg-white/10 hidden lg:block" />
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
       {/* Comparison */}
       <section className="bg-[#070612] py-[60px] md:py-[96px] px-5 md:px-[52px] relative overflow-hidden">
         <div className="absolute top-[-250px] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[radial-gradient(ellipse,rgba(110,41,246,0.12)_0%,transparent_65%)] pointer-events-none" />
@@ -475,71 +616,80 @@ export function Home() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
           <motion.div 
-            className="bg-[#100E22] rounded-2xl overflow-hidden border border-white/5"
+            className="bg-[#100E22] rounded-3xl overflow-hidden border border-white/5"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
             variants={fadeLeft}
           >
-            <div className="flex items-center gap-3 p-[22px_26px_18px] border-b border-white/5">
-              <div className="w-[46px] h-[46px] rounded-xl flex items-center justify-center text-lg shrink-0 bg-[#F04438]/15">
-                <X className="w-5 h-5 text-[#F04438]/70" />
+            <div className="flex items-center gap-4 p-8 border-b border-white/5 bg-white/[0.02]">
+              <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 bg-red-500/10 border border-red-500/20">
+                <X className="w-6 h-6 text-red-500" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-white mb-0.5">Time Interno (Sênior)</h3>
-                <span className="text-[12px] font-bold tracking-[0.15em] uppercase text-[#F04438]/70">MODELO TRADICIONAL — ALTO RISCO</span>
+                <h3 className="text-lg font-bold text-white mb-0.5">Time Interno (Sênior)</h3>
+                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-red-500/80 font-mono">MODELO TRADICIONAL — ALTO RISCO</span>
               </div>
             </div>
-            <div className="py-1">
+            <div className="p-4">
               {[
-                { l: 'Custos iniciais', v: 'Recrutamento, Setup & Equip.', c: 'text-[#FDA29B]' },
-                { l: 'Encargos trabalhistas', v: 'CLT, Férias, 13º, Benefícios', c: 'text-[#FDA29B]' },
-                { l: 'Curva de aprendizado', v: '3–6 meses de Ramp-Up', c: 'text-[#FEC84B]' },
-                { l: 'Ferramentas tech', v: 'Assinaturas avulsas ($$$)', c: 'text-[#FEC84B]' },
-                { l: 'Especialização', v: 'Generalista ou 1 canal', c: 'text-[#FEC84B]' },
-                { l: 'Risco de turnover', v: 'Perda crítica de conhecimento', c: 'text-[#FDA29B]' },
+                { l: 'Custos iniciais', v: 'Recrutamento, Setup & Equip.', c: 'text-red-400', icon: <AlertCircle className="w-3.5 h-3.5" /> },
+                { l: 'Encargos trabalhistas', v: 'CLT, Férias, 13º, Benefícios', c: 'text-red-400', icon: <AlertCircle className="w-3.5 h-3.5" /> },
+                { l: 'Curva de aprendizado', v: '3–6 meses de Ramp-Up', c: 'text-amber-400', icon: <Clock className="w-3.5 h-3.5" /> },
+                { l: 'Ferramentas tech', v: 'Assinaturas avulsas ($$$)', c: 'text-amber-400', icon: <ShieldAlert className="w-3.5 h-3.5" /> },
+                { l: 'Especialização', v: 'Generalista ou 1 canal', c: 'text-amber-400', icon: <UserMinus className="w-3.5 h-3.5" /> },
+                { l: 'Risco de turnover', v: 'Perda crítica de conhecimento', c: 'text-red-400', icon: <AlertCircle className="w-3.5 h-3.5" /> },
               ].map((r, i) => (
-                <div key={i} className="flex items-center justify-between p-[13px_26px] border-b border-white/5 last:border-b-0 hover:bg-white/5 transition-colors">
-                  <span className="text-[13px] text-white/70 font-normal">{r.l}</span>
-                  <span className={twMerge("text-[12px] font-bold font-mono", r.c)}>{r.v}</span>
+                <div key={i} className="flex items-center justify-between p-4 rounded-xl hover:bg-white/[0.03] transition-colors group">
+                  <div className="flex items-center gap-3">
+                    <span className="text-white/30 group-hover:text-white/50 transition-colors">{r.icon}</span>
+                    <span className="text-[13px] text-white/70 font-normal">{r.l}</span>
+                  </div>
+                  <span className={twMerge("text-[12px] font-bold font-mono text-right", r.c)}>{r.v}</span>
                 </div>
               ))}
             </div>
           </motion.div>
 
           <motion.div 
-            className="bg-[#100E22] rounded-2xl overflow-hidden border-2 border-primary relative shadow-[0_0_40px_rgba(110,41,246,0.15)] transform md:-translate-y-2 z-20"
+            className="bg-[#100E22] rounded-3xl overflow-hidden border-2 border-primary relative shadow-[0_32px_80px_rgba(110,41,246,0.2)] transform md:-translate-y-4 z-20"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
             variants={fadeRight}
           >
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#9B5BFF] to-[#C084FC]" />
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/20 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-[#9B5BFF] to-[#C084FC]" />
+            <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/20 rounded-full blur-[100px] pointer-events-none" />
             
-            <div className="flex items-center gap-3 p-[22px_26px_18px] border-b border-white/5 relative z-10">
-              <div className="w-[46px] h-[46px] rounded-xl flex items-center justify-center text-lg shrink-0 bg-primary/20">
-                <ArrowUpRight className="w-5 h-5 text-primary/80" />
+            <div className="flex items-center gap-4 p-8 border-b border-white/5 bg-primary/5 relative z-10">
+              <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 bg-primary/20 border border-primary/30">
+                <CheckCircle2 className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-white mb-0.5">Squad Especializada YAV</h3>
-                <span className="text-[12px] font-bold tracking-[0.15em] uppercase text-primary/80">MAXIMIZAÇÃO DO LUCRO LÍQUIDO</span>
+                <h3 className="text-lg font-bold text-white mb-0.5">Squad Especializada YAV</h3>
+                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-primary font-mono">MAXIMIZAÇÃO DO LUCRO LÍQUIDO</span>
+              </div>
+              <div className="ml-auto hidden sm:block">
+                <span className="bg-primary text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-widest">Recomendado</span>
               </div>
             </div>
-            <div className="py-1">
+            <div className="p-4">
               {[
-                { l: 'Custos iniciais', v: 'Zero encargos e infraestrutura', c: 'text-[#6CE9A6]' },
-                { l: 'Modelo financeiro', v: 'Fixo mensal previsível (OPEX)', c: 'text-[#6CE9A6]' },
-                { l: 'Curva de aprendizado', v: 'Operacionais no Day 1', c: 'text-[#6CE9A6]' },
-                { l: 'Ferramentas tech', v: 'Incluídas no serviço', c: 'text-[#6CE9A6]' },
-                { l: 'Inteligência aplicada', v: 'Know-how de dezenas de operações', c: 'text-[#BDB4FE]' },
-                { l: 'Foco', v: 'Retorno Sobre o Investimento', c: 'bg-primary/20 border border-primary/45 text-[#C4B5FD] px-2.5 py-0.5 rounded-xl' },
+                { l: 'Custos iniciais', v: 'Zero encargos e infraestrutura', c: 'text-emerald-400', icon: <Check className="w-3.5 h-3.5" /> },
+                { l: 'Modelo financeiro', v: 'Valor mensal previsível (OPEX)', c: 'text-emerald-400', icon: <TrendingUp className="w-3.5 h-3.5" /> },
+                { l: 'Curva de aprendizado', v: 'Operacionais no Day 1', c: 'text-emerald-400', icon: <Zap className="w-3.5 h-3.5" /> },
+                { l: 'Ferramentas tech', v: 'Incluídas no serviço', c: 'text-emerald-400', icon: <Layers className="w-3.5 h-3.5" /> },
+                { l: 'Inteligência aplicada', v: 'Know-how de dezenas de operações', c: 'text-primary-light', icon: <BrainCircuit className="w-3.5 h-3.5" /> },
+                { l: 'Foco estratégico', v: 'Retorno Sobre o Investimento', c: 'text-white bg-primary/30 px-3 py-1 rounded-lg border border-primary/40', icon: <Target className="w-3.5 h-3.5" /> },
               ].map((r, i) => (
-                <div key={i} className="flex items-center justify-between p-[13px_26px] border-b border-white/5 last:border-b-0 hover:bg-white/5 transition-colors">
-                  <span className="text-[13px] text-white/70 font-normal">{r.l}</span>
-                  <span className={twMerge("text-[12px] font-bold font-mono", r.c)}>{r.v}</span>
+                <div key={i} className="flex items-center justify-between p-4 rounded-xl hover:bg-white/[0.03] transition-colors group">
+                  <div className="flex items-center gap-3">
+                    <span className="text-primary/40 group-hover:text-primary/60 transition-colors">{r.icon}</span>
+                    <span className="text-[13px] text-white/70 font-normal">{r.l}</span>
+                  </div>
+                  <span className={twMerge("text-[12px] font-bold font-mono text-right", r.c)}>{r.v}</span>
                 </div>
               ))}
             </div>
@@ -559,26 +709,26 @@ export function Home() {
           <div className="inline-flex items-center gap-1.5 text-[12px] font-bold tracking-[0.12em] uppercase px-3.5 py-1.5 rounded-xl mb-4 font-mono bg-primary-light text-primary before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-primary">
             Por que a YAV
           </div>
-          <h2 className="text-[clamp(32px,4vw,52px)] font-extrabold tracking-[-1.5px] leading-[1.06] text-text-primary max-w-[560px] mb-3.5">
+          <h2 className="text-[clamp(32px,4vw,52px)] font-extrabold tracking-[-1.5px] leading-[1.06] text-text-primary max-w-[660px] mb-3.5">
             O que nos separa de uma agência comum
           </h2>
-          <p className="text-base font-light text-text-secondary leading-[1.78] max-w-[540px]">
-            Não fazemos entregas avulsas. Construímos operações digitais com método, cadência e accountability em cada ponto.
+          <p className="text-base font-light text-text-secondary leading-[1.78] max-w-[700px]">
+            Enquanto agências normais focam apenas no layout e deixam a complexidade técnica com você, a YAV não só fala, como faz. Trazemos as melhores escolhas de plataforma, gateway, frete e ERP, conectamos e configuramos todas as ferramentas e ainda realizamos o cadastro de produtos, deixando sua operação pronta para escalar nos Marketplaces.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
-            { icon: Target, bg: 'bg-primary-light', title: 'Método comprovado', desc: 'Projeto com módulos, etapas, responsáveis e prazos. Checkin semanal — nenhuma tarefa parada por mais de 7 dias.', delay: 0.08 },
-            { icon: BarChart2, bg: 'bg-[#E6FAF2]', title: 'Dados, não achismo', desc: 'Relatório mensal consolidado por canal, reunião de análise e planejamento orientado a resultado real.', delay: 0.16 },
-            { icon: LinkIcon, bg: 'bg-primary-light', title: 'Visão 360° integrada', desc: 'Loja própria, marketplaces e ADS num único time. Estratégia coesa — não silos que não se conversam.', delay: 0.24 },
-            { icon: Zap, bg: 'bg-[#FEF9EC]', title: 'Especialista por canal', desc: 'Cada plataforma tem um especialista dedicado. Algoritmos, sazonalidade e oportunidades dominados.', delay: 0.08 },
-            { icon: Shield, bg: 'bg-primary-light', title: 'Transparência total', desc: 'O cliente acessa tarefas, status e entregas em tempo real. Zero surpresas, zero decisões sem alinhamento.', delay: 0.16 },
-            { icon: Rocket, bg: 'bg-[#E6FAF2]', title: 'Escala sem reconstruir', desc: 'Novos canais ou mais volume — o modelo cresce com você sem precisar recomeçar a operação do zero.', delay: 0.24 },
+            { icon: Target, bg: 'bg-primary/5', color: 'text-primary', title: 'Plataforma & ERP', desc: 'Trazemos as melhores escolhas de plataforma, gateway, frete e ERP para o seu cenário específico.', delay: 0.08 },
+            { icon: Zap, bg: 'bg-amber-500/5', color: 'text-amber-600', title: 'Conexão & Configuração', desc: 'Não apenas indicamos, nós conectamos e configuramos todas as ferramentas da sua operação digital.', delay: 0.16 },
+            { icon: Box, bg: 'bg-emerald-500/5', color: 'text-emerald-600', title: 'Cadastro de Produtos', desc: 'Realizamos o cadastro técnico dos seus produtos, garantindo que tudo esteja pronto para vender.', delay: 0.24 },
+            { icon: Rocket, bg: 'bg-purple-500/5', color: 'text-purple-600', title: 'Pronto para Marketplaces', desc: 'Deixamos sua estrutura preparada para expandir e vender nos maiores marketplaces do país.', delay: 0.08 },
+            { icon: BarChart2, bg: 'bg-blue-500/5', color: 'text-blue-600', title: 'Especialista por canal', desc: 'Cada plataforma tem um especialista dedicado. Algoritmos, sazonalidade e oportunidades dominados.', delay: 0.16 },
+            { icon: Shield, bg: 'bg-indigo-500/5', color: 'text-indigo-600', title: 'Transparência total', desc: 'O cliente acessa tarefas, status e entregas em tempo real. Zero surpresas, zero decisões sem alinhamento.', delay: 0.24 },
           ].map((df, i) => (
             <motion.div 
               key={i}
-              className="bg-white rounded-[10px] p-[26px] border border-border transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(110,41,246,0.08)] hover:border-primary/20"
+              className="group bg-white rounded-3xl p-8 border border-border transition-all duration-500 hover:shadow-[0_20px_48px_rgba(0,0,0,0.04)] hover:-translate-y-1 hover:border-primary/20"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
@@ -587,11 +737,11 @@ export function Home() {
                 visible: { opacity: 1, y: 0, transition: { duration: 0.65, delay: df.delay, ease: [0.16, 1, 0.3, 1] } }
               }}
             >
-              <div className={twMerge("w-[42px] h-[42px] rounded-[10px] flex items-center justify-center mb-3", df.bg)}>
-                <df.icon className="w-5 h-5 text-text-primary" />
+              <div className={twMerge("w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-500 group-hover:scale-110", df.bg)}>
+                <df.icon className={twMerge("w-6 h-6", df.color)} />
               </div>
-              <h4 className="text-sm font-bold text-text-primary mb-1.5 tracking-[-0.15px]">{df.title}</h4>
-              <p className="text-[13px] text-text-secondary leading-[1.65] font-light">{df.desc}</p>
+              <h4 className="text-lg font-bold text-text-primary mb-3 tracking-tight group-hover:text-primary transition-colors">{df.title}</h4>
+              <p className="text-[14px] text-text-secondary leading-relaxed font-light">{df.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -610,17 +760,17 @@ export function Home() {
             Metodologia
           </div>
           <h2 className="text-[clamp(32px,4vw,52px)] font-extrabold tracking-[-1.5px] leading-[1.06] text-white max-w-[500px] mb-2.5">
-            Do diagnóstico à eficiência contínua
+            A squad que sua operação merece.
           </h2>
           <p className="text-base font-light text-white/70 leading-[1.78] max-w-[540px]">
-            Fases claras, entregas definidas, responsabilidades alinhadas em cada projeto.
+            Não somos apenas uma agência. Somos a extensão do seu time, focada em execução técnica e inteligência de dados.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-7 md:gap-0 relative">
           <div className="hidden md:block absolute top-7 left-11 right-11 h-px bg-white/10 z-0" />
           {[
-            { n: '01', title: 'Diagnóstico', desc: 'Análise profunda do negócio, canais, dados e concorrência.', delay: 0.08 },
+            { n: '01', title: 'Imersão', desc: 'Análise profunda do negócio, canais, dados e concorrência.', delay: 0.08 },
             { n: '02', title: 'Planejamento', desc: 'Metas, KPIs e roadmap definidos com o cliente.', delay: 0.16 },
             { n: '03', title: 'Execução', desc: 'Time dedicado com checkin semanal e rastreabilidade total.', delay: 0.24 },
             { n: '04', title: 'Crescimento', desc: 'Reporte mensal, análise e expansão contínua dos canais.', delay: 0.32 },
@@ -690,7 +840,7 @@ export function Home() {
             >
               <Link to={`/blog/${post.id}`} className="group block bg-white rounded-2xl overflow-hidden border border-border transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_48px_rgba(110,41,246,0.08)] h-full flex flex-col">
                 <div className="aspect-[16/9] overflow-hidden relative">
-                  <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
                   <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase text-primary">
                     {post.category}
                   </div>
@@ -741,7 +891,7 @@ export function Home() {
           {[
             {
               q: "O que a YAV Digital faz?",
-              a: "A YAV Digital é especialista em e-commerce e marketplaces. Oferecemos 5 serviços: implantação de e-commerce (Shopify, VTEX, Wake, Tray), gestão de marketplaces (Mercado Livre, Shopee, Amazon, Magalu, TikTok Shop), gestão de e-commerce (CRO, SEO, e-mail marketing), gestão de ADS em marketplaces e cadastro de produtos em escala.",
+              a: "A YAV Digital é especialista em e-commerce e marketplaces. Oferecemos 5 serviços: implementação de e-commerce (Shopify, VTEX, Wake, Tray), gestão de marketplaces (Mercado Livre, Shopee, Amazon, Magalu, TikTok Shop), gestão de e-commerce (CRO, SEO, e-mail marketing), gestão de ADS em marketplaces e cadastro de produtos em escala.",
               delay: 0.08
             },
             {
@@ -760,8 +910,13 @@ export function Home() {
               delay: 0.08
             },
             {
-              q: "Como funciona o diagnóstico gratuito?",
-              a: "É uma reunião de 30 minutos, sem custo e sem compromisso. Analisamos sua operação digital, identificamos oportunidades e gargalos, e apresentamos recomendações práticas. Em seguida, enviamos uma proposta personalizada com escopo, prazos e valores.",
+              q: "Por que contratar a YAV e não uma agência tradicional?",
+              a: "Diferente de uma agência tradicional que foca apenas no front-end e apenas aponta o que precisa ser feito no restante, a YAV atua de ponta a ponta. Nós não apenas apontamos, nós executamos: desde a escolha das melhores ferramentas para o seu negócio até a configuração completa e todo o desenho da operação.",
+              delay: 0.24
+            },
+            {
+              q: "Como funciona a conversa estratégica?",
+              a: "É uma reunião estratégica de 30 minutos com um de nossos consultores. O objetivo é entender os desafios da sua operação, tirar dúvidas e apontar o melhor caminho para o seu negócio. Não é um relatório técnico, mas sim um direcionamento estratégico para sua tomada de decisão.",
               delay: 0.16
             }
           ].map((faq, i) => (
