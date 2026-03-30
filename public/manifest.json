@@ -1,21 +1,116 @@
 {
-  "name": "YAV Digital",
+  "name": "YAV Digital — E-commerce & Marketplaces",
   "short_name": "YAV",
-  "description": "Especialistas em operação de e-commerce e marketplaces.",
+  "description": "Especialistas em operação de e-commerce e marketplaces. Implementação, gestão e inteligência para VTEX, Shopify, Mercado Livre e Amazon.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "background_color": "#F2F1F6",
   "theme_color": "#6e29f6",
+  "categories": ["business", "productivity", "shopping"],
+  "lang": "pt-BR",
+  "dir": "ltr",
   "icons": [
     {
       "src": "/favicon.svg",
-      "sizes": "192x192",
-      "type": "image/svg+xml"
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     },
     {
-      "src": "/favicon.svg",
+      "src": "/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
-  ]
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/home-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Tela inicial - Desktop"
+    },
+    {
+      "src": "/screenshots/home-mobile.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Tela inicial - Mobile"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Nossos Serviços",
+      "short_name": "Serviços",
+      "description": "Conheça nossos serviços de e-commerce",
+      "url": "/servicos",
+      "icons": [{ "src": "/icons/services-icon.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Fale Conosco",
+      "short_name": "Contato",
+      "description": "Entre em contato com a YAV Digital",
+      "url": "/contato",
+      "icons": [{ "src": "/icons/contact-icon.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Cases de Sucesso",
+      "short_name": "Cases",
+      "description": "Veja nossos cases de sucesso",
+      "url": "/cases",
+      "icons": [{ "src": "/icons/cases-icon.png", "sizes": "96x96" }]
+    }
+  ],
+  "share_target": {
+    "action": "/compartilhar",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "titulo",
+      "text": "texto",
+      "url": "url"
+    }
+  },
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"]
 }
