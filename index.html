@@ -1,24 +1,74 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>YAV Digital — E-commerce & Marketplaces</title>
-    <meta name="description" content="Especialistas em operação de e-commerce e marketplaces. Implementação, gestão e inteligência para VTEX, Shopify, Mercado Livre e Amazon." />
-    <meta name="keywords" content="e-commerce, marketplace, vtex, shopify, mercado livre, amazon, gestão de e-commerce, implementação de e-commerce" />
-    <meta name="author" content="YAV Digital" />
-    <meta name="theme-color" content="#6e29f6" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#6e29f6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0C0B16" media="(prefers-color-scheme: dark)" />
     
+    <!-- Preconnects para performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://yavdigital.com.br" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
     <link rel="manifest" href="/manifest.json" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Canonical (será atualizado dinamicamente pelo React Helmet) -->
+    <link rel="canonical" href="https://yavdigital.com.br" />
+    
+    <!-- Fonts com display swap para performance -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+    </noscript>
+    
+    <!-- Critical CSS inline para LCP -->
+    <style>
+      /* Critical CSS para acima da dobra */
+      body{margin:0;font-family:'Poppins',system-ui,sans-serif;background:#F2F1F6;color:#000;-webkit-font-smoothing:antialiased}
+      #root{min-height:100vh;display:flex;flex-direction:column}
+      .loading-skeleton{background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
+      @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    </style>
+    
+    <!-- No-JS fallback -->
+    <noscript>
+      <meta http-equiv="refresh" content="0;url=/noscript.html" />
+    </noscript>
   </head>
-  <body>
-    <div id="root"></div>
+  <body class="antialiased overflow-x-hidden">
+    <!-- Skip to main content para acessibilidade -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:px-6 focus:py-3 focus:bg-primary focus:text-white focus:rounded-xl focus:font-bold focus:outline-none focus:ring-4 focus:ring-primary/30 transition-all">
+      Pular para o conteúdo principal
+    </a>
+    
+    <div id="root" role="application" aria-label="Aplicação YAV Digital">
+      <!-- Loading skeleton para percepção de performance -->
+      <div class="loading-skeleton fixed inset-0 z-50" id="initial-loader" />
+    </div>
+    
+    <script>
+      // Remove loader quando app carregar
+      window.addEventListener('load', () => {
+        const loader = document.getElementById('initial-loader');
+        if (loader) {
+          loader.style.opacity = '0';
+          setTimeout(() => loader.remove(), 300);
+        }
+      });
+      
+      // Detecta redução de movimento
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('reduce-motion');
+      }
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
